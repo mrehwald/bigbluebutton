@@ -9,6 +9,8 @@ scala:
 jdk:
 - oraclejdk10
 
+node_js: 9
+
 addons:
   apt:
     sources:
@@ -36,7 +38,6 @@ env:
   - METEOR_DEBUG_BUILD=1
 
 before_install:
-- curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 - mkdir -pv $HOME/build
 - mkdir -pv $HTML5METEOR
 - mkdir -pv $RED5BASEDIR
