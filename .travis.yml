@@ -1,22 +1,18 @@
 branches:
   only:
-  - "v2.2-dev"
+  - 'v2.2-dev'
 
-language: "scala"
-
+language: scala
 scala:
-- "2.12.6"
+- 2.12.7
 
 jdk:
-- "oraclejdk10"
-
-node_js:
-- "9"
+- oraclejdk10
 
 addons:
   apt:
     sources:
-    - sourceline: "ppa:cwchien/gradle"
+    - sourceline: 'ppa:cwchien/gradle'
     packages:
     -  gradle-4.7
 
@@ -40,6 +36,7 @@ env:
   - METEOR_DEBUG_BUILD=1
 
 before_install:
+- curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 - mkdir -pv $HOME/build
 - mkdir -pv $HTML5METEOR
 - mkdir -pv $RED5BASEDIR
