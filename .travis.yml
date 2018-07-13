@@ -1,0 +1,109 @@
+branches:
+  only:
+     - "centos7"
+  
+language: 
+   - "scala"
+
+scala: 
+   - "2.12.6"
+
+jdk: 
+   - "oraclejdk10"
+
+node_js:
+   - "9"
+   
+addons:
+  apt:
+    sources: 
+       - sourceline: "ppa:cwchien/gradle"
+    packages: gradle-4.7
+
+cache:
+    directories:
+       - "$HOME/.m2"
+       - "$HOME/.ivy2"
+       - "$HOME/.meteor"
+       - "$HOME/.cordova"
+       - "$HOME/.npm"
+       - "$HOME/.node-gyp"
+       - "$HOME/.gradle"
+       - "$HOME/.grails"
+       
+env:
+   global:
+      - RED5BASEDIR=$TRAVIS_BUILD_DIR/var_lib_red5
+      - RED5APPDIR=$RED5BASEDIR/webapps
+      - HTML5METEOR=$HOME/html5meteor
+      - METEOR_DEBUG_BUILD=1
+
+before_install:
+   - mkdir -pv $HOME/build
+   - mkdir -pv $HTML5METEOR
+   - mkdir -pv $RED5BASEDIR
+   - mkdir -pv $RED5APPDIR
+   - echo Created directories
+   - ls -l $HOME && df -h
+#
+# removing some stuff to save space (see below, we ran into disk space issues earlier
+#
+   - sudo sudo apt-get -y purge postgresql-9.2
+   - sudo sudo apt-get -y purge postgresql-9.3
+   - sudo sudo apt-get -y purge postgresql-9.4
+   - sudo sudo apt-get -y purge postgresql-9.5
+   - sudo sudo apt-get -y purge postgresql-9.6
+   - sudo sudo apt-get -y purge postgresql-common
+   - sudo apt -y purge mysql-server-5.6
+   - sudo apt -y autoremove
+   
+script:
+   - cd $TRAVIS_BUILD_DIR/bbb-common-message && sbt clean publish publishLocal
+   - cd $TRAVIS_BUILD_DIR/bbb-common-web && sbt clean publish publishLocal 
+   - cd $TRAVIS_BUILD_DIR/bbb-apps-common && sbt clean publish publishLocal
+   - cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean publish publishLocal
+   - cd $TRAVIS_BUILD_DIR/akka-bbb-apps && sbt clean publish publishLocal
+   - cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean publish publishLocal
+   - cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean publish publishLocal
+#
+# cleaning up as we ran into 'No Space Left on Device' issues at some point about here
+#
+   - rm -rf $TRAVIS_BUILD_DIR/bbb-common-message
+   - rm -rf $TRAVIS_BUILD_DIR/bbb-common-web
+   - rm -rf $TRAVIS_BUILD_DIR/bbb-apps-common 
+   - rm -rf $TRAVIS_BUILD_DIR/bbb-fsesl-client
+   - rm -rf $TRAVIS_BUILD_DIR/akka-bbb-apps
+   - rm -rf $TRAVIS_BUILD_DIR/akka-bbb-fsesl
+   - rm -rf TRAVIS_BUILD_DIR/akka-bbb-transcode
+#
+# building the core backend applications
+#
+   - cd $TRAVIS_BUILD_DIR/bbb-voice && /usr/lib/gradle/4.7/bin/gradle resolveDeps && /usr/lib/gradle/4.7/bin/gradle clean war deploy
+   - cd $TRAVIS_BUILD_DIR/bbb-video && /usr/lib/gradle/4.7/bin/gradle resolveDeps && /usr/lib/gradle/4.7/bin/gradle clean war deploy
+   - cd $TRAVIS_BUILD_DIR/bigbluebutton-apps && /usr/lib/gradle/4.7/bin/gradle resolveDeps && /usr/lib/gradle/4.7/bin/gradle clean war deploy
+#
+   - rm -rf TRAVIS_BUILD_DIR/bbb-voice
+   - rm -rf TRAVIS_BUILD_DIR/bbb-video
+   - rm -rf TRAVIS_BUILD_DIR/bigbluebutton-apps
+#
+# building the html5 meteor backend and (web-(client
+#
+   - cd $HOME && sudo npm i -g npm
+   - cd $HOME && curl https://install.meteor.com | sh
+   - cd $TRAVIS_BUILD_DIR/bigbluebutton-html5 && meteor npm install && meteor npm install @babel/runtime
+#   - meteor remove standard-minifier-js
+# make active in case minifier causes travis to time out again (this thing takes loooong
+   - cd $TRAVIS_BUILD_DIR/bigbluebutton-html5
+   - travis_wait 50 meteor build $HTML5METEOR --directory --server-only --architecture=os.linux.x86_64
+   - cd $HTML5METEOR/bundle/programs/server && npm install --production
+
+
+before_deploy:
+  - cd $HOME/build
+  - tar -cvf red5webapps.tar $RED5APPDIR
+  - tar -cvf bbb_javalibs.tar $HOME/.ivy2
+  - tar -cvf bbb-html5.tar $HTML5METEOR
+  - "ls -al" && df -h
+ 
+notifications:
+   email: "martin.rehwald@gmail.com"
