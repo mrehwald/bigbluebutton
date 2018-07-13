@@ -14,7 +14,7 @@ addons:
     sources:
     - sourceline: 'ppa:cwchien/gradle'
     packages:
-    -  gradle-4.7
+    - gradle-4.7
 
 
 cache:
@@ -100,5 +100,5 @@ before_deploy:
 - tar -cvf red5webapps.tar $RED5APPDIR
 - tar -cvf bbb_javalibs.tar $HOME/.ivy2
 - tar -cvf bbb-html5.tar $HTML5METEOR
-- "ls -al" && df -h
+- ls -al && df -h
 
