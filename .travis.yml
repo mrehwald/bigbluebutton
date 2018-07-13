@@ -1,6 +1,6 @@
 branches:
   only:
-     - "centos7"
+     - "v2.2-dev"
   
 language: 
    - "scala"
