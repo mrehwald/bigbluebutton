@@ -16,8 +16,10 @@ node_js:
 addons:
   apt:
     sources:
-      - gradle-4.7
-      - sourceline: "ppa:cwchien/gradle"
+    - sourceline: "ppa:cwchien/gradle"
+    packages:
+    -  gradle-4.7
+
 
 cache:
   directories:
