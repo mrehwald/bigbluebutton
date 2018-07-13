@@ -1,6 +1,10 @@
 branches:
   only:
+<<<<<<< HEAD
      - "centos7"
+=======
+     - "v2.2-dev"
+>>>>>>> e97082bd69de7e60d1c39f167646f6036653c8bb
   
 language: 
    - "scala"
@@ -17,7 +21,7 @@ node_js:
 addons:
   apt:
     sources: 
-       - sourceline: "ppa:cwchien/gradle"
+       sourceline: "ppa:cwchien/gradle"
     packages: gradle-4.7
 
 cache:
@@ -96,7 +100,6 @@ script:
    - cd $TRAVIS_BUILD_DIR/bigbluebutton-html5
    - travis_wait 50 meteor build $HTML5METEOR --directory --server-only --architecture=os.linux.x86_64
    - cd $HTML5METEOR/bundle/programs/server && npm install --production
-
 
 before_deploy:
   - cd $HOME/build
