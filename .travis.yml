@@ -4,9 +4,12 @@ branches:
 
 language: scala
 scala:
+- 20.10.4
 - 2.12.7
 
 jdk:
+- oraclejdk8
+- openjdk8
 - oraclejdk10
 
 node_js: 9
