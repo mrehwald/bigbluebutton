@@ -18,8 +18,10 @@ addons:
   apt:
     sources:
     - sourceline: 'ppa:cwchien/gradle'
+    - sourceline: 'ppa:groovy-dev/grails'
     packages:
     - gradle-4.7
+    - grails-2.2
 
 
 cache:
