@@ -83,9 +83,29 @@ script:
   #
   # building the core backend applications
   #
-- cd $TRAVIS_BUILD_DIR/bbb-voice && /usr/lib/gradle/4.7/bin/gradle resolveDeps && /usr/lib/gradle/4.7/bin/gradle clean war deploy
-- cd $TRAVIS_BUILD_DIR/bbb-video && /usr/lib/gradle/4.7/bin/gradle resolveDeps && /usr/lib/gradle/4.7/bin/gradle clean war deploy
-- cd $TRAVIS_BUILD_DIR/bigbluebutton-apps && /usr/lib/gradle/4.7/bin/gradle resolveDeps && /usr/lib/gradle/4.7/bin/gradle clean war deploy
+- echo building bbb-voice
+- cd $TRAVIS_BUILD_DIR/bbb-voice
+- /usr/lib/gradle/4.7/bin/gradle clean
+- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+- /usr/lib/gradle/4.7/bin/gradle war
+- ls -rtl
+- /usr/lib/gradle/4.7/bin/gradle deploy
+ #
+- echo building bbb-video
+- cd $TRAVIS_BUILD_DIR/bbb-voice
+- /usr/lib/gradle/4.7/bin/gradle clean
+- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+- /usr/lib/gradle/4.7/bin/gradle war
+- ls -rtl
+- /usr/lib/gradle/4.7/bin/gradle deploy
+  #
+- echo building bigbluebutton-apps
+- cd $TRAVIS_BUILD_DIR/bbb-voice
+- /usr/lib/gradle/4.7/bin/gradle clean
+- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+- /usr/lib/gradle/4.7/bin/gradle war
+- ls -rtl
+- /usr/lib/gradle/4.7/bin/gradle deploy
   #
 - rm -rf TRAVIS_BUILD_DIR/bbb-voice
 - rm -rf TRAVIS_BUILD_DIR/bbb-video
@@ -93,7 +113,14 @@ script:
   #
   # building tomcat core webapp (api)
   #
-- cd $TRAVIS_BUILD_DIR/bigbluebutton-web && /usr/lib/gradle/4.7/bin/gradle resolveDeps && /usr/lib/gradle/4.7/bin/gradle clean  && grails clean
+- echo building web app
+- cd $TRAVIS_BUILD_DIR/bigbluebutton-web
+- /usr/lib/gradle/4.7/bin/gradle clean
+- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+- /usr/lib/gradle/4.7/bin/grails clean
+- /usr/lib/gradle/4.7/bin/grails war
+- ls -rtl
+- /usr/lib/gradle/4.7/bin/gradle deploy
   #
   # building the html5 meteor backend and (web-(client
   #
