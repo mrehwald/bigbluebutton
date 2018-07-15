@@ -38,6 +38,7 @@ env:
   - RED5APPSDIR=$RED5BASEDIR/webapps
   - HTML5METEOR=$HOME/html5meteor
   - METEOR_DEBUG_BUILD=1
+  - BBB_LOGPATH=$RED5APPSDIR/logs
 
 before_install:
 - curl -s http://get.sdkman.io | bash
@@ -48,6 +49,7 @@ before_install:
 - mkdir -pv $HTML5METEOR
 - mkdir -pv $RED5BASEDIR
 - mkdir -pv $RED5APPSDIR
+- mkdie -pv BBB_LOGPATH
 - echo Created directories
 - ls -l $HOME && df -h
   #
@@ -115,8 +117,10 @@ script:
   #
 - echo building web app
 - cd $TRAVIS_BUILD_DIR/bigbluebutton-web
-- mkdir build   # openjdk throwing an error otherwisse, //TOTO: fix in gradle build file
+- mkdir -pv build   # openjdk throwing an error otherwisse, //TOTO: fix in gradle build file
 #- grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
+- gradle properties
+- /usr/lib/gradle/4.7/bin/gradle properties
 - /usr/lib/gradle/4.7/bin/gradle clean
 - /usr/lib/gradle/4.7/bin/gradle resolveDeps
 - grails clean
