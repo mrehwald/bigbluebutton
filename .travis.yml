@@ -115,9 +115,12 @@ script:
   #
 - echo building web app
 - cd $TRAVIS_BUILD_DIR/bigbluebutton-web
+- mkdir build   # openjdk throwing an error otherwisse, //TOTO: fix in gradle build file
+#- grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
 - /usr/lib/gradle/4.7/bin/gradle clean
 - /usr/lib/gradle/4.7/bin/gradle resolveDeps
 - grails clean
+- grails compile
 - grails war
 - ls -rtl
 - /usr/lib/gradle/4.7/bin/gradle deploy
@@ -131,7 +134,7 @@ script:
   # make active in case minifier causes travis to time out again (this thing takes loooong
 - cd $TRAVIS_BUILD_DIR/bigbluebutton-html5
 - travis_wait 50 meteor build $HTML5METEOR --directory --server-only --architecture=os.linux.x86_64
-- cd $HTML5METEOR/bundle/programs/server && npm install --production
+#- cd $HTML5METEOR/bundle/programs/server && npm install --production
  #
 - ls -rtl $RED5BASEDIR
 
