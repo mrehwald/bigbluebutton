@@ -1,6 +1,7 @@
 branches:
   only:
   - 'v2.2-dev'
+  - 'MR-v2.2-dev-playground'
 
 language: scala
 scala:
