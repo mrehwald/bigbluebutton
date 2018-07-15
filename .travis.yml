@@ -1,7 +1,7 @@
 branches:
   only:
   - 'v2.2-dev'
-  - 'MR-v2.2-dev-playground'
+  - 'mr_private/MR-v2.2-dev-playground'
 
 language: scala
 scala:
@@ -93,7 +93,7 @@ script:
 - /usr/lib/gradle/4.7/bin/gradle war
 - ls -rtl
 - /usr/lib/gradle/4.7/bin/gradle deploy
- #
+  #
 - echo building bbb-video
 - cd $TRAVIS_BUILD_DIR/bbb-voice
 - /usr/lib/gradle/4.7/bin/gradle clean
@@ -118,9 +118,7 @@ script:
   #
 - echo building web app
 - cd $TRAVIS_BUILD_DIR/bigbluebutton-web
-- mkdir -pv build   # openjdk throwing an error otherwisse, //TOTO: fix in gradle build file
-#- grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
-- gradle properties
+  #- grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
 - /usr/lib/gradle/4.7/bin/gradle properties
 - /usr/lib/gradle/4.7/bin/gradle clean
 - /usr/lib/gradle/4.7/bin/gradle resolveDeps
@@ -139,8 +137,8 @@ script:
   # make active in case minifier causes travis to time out again (this thing takes loooong
 - cd $TRAVIS_BUILD_DIR/bigbluebutton-html5
 - travis_wait 50 meteor build $HTML5METEOR --directory --server-only --architecture=os.linux.x86_64
-#- cd $HTML5METEOR/bundle/programs/server && npm install --production
- #
+  #- cd $HTML5METEOR/bundle/programs/server && npm install --production
+  #
 - ls -Rrtl $BUILD_DIRECTORY
 
 before_deploy:
