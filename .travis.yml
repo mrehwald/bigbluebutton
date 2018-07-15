@@ -36,7 +36,7 @@ cache:
 env:
   global:
   - RED5BASEDIR=$TRAVIS_BUILD_DIR/var_lib_red5
-  - RED5APPDIR=$RED5BASEDIR/webapps
+  - RED5APPSDIR=$RED5BASEDIR/webapps
   - HTML5METEOR=$HOME/html5meteor
   - METEOR_DEBUG_BUILD=1
 
@@ -44,7 +44,7 @@ before_install:
 - mkdir -pv $HOME/build
 - mkdir -pv $HTML5METEOR
 - mkdir -pv $RED5BASEDIR
-- mkdir -pv $RED5APPDIR
+- mkdir -pv $RED5APPSDIR
 - echo Created directories
 - ls -l $HOME && df -h
   #
@@ -87,6 +87,10 @@ script:
 - rm -rf TRAVIS_BUILD_DIR/bbb-voice
 - rm -rf TRAVIS_BUILD_DIR/bbb-video
 - rm -rf TRAVIS_BUILD_DIR/bigbluebutton-apps
+  #
+  # building tomcat core webapp (api)
+  #
+- cd $TRAVIS_BUILD_DIR/bigbluebutton-web && /usr/lib/gradle/4.7/bin/gradle resolveDeps && /usr/lib/gradle/4.7/bin/gradle clean  && grails clean
   #
   # building the html5 meteor backend and (web-(client
   #
