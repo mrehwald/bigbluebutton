@@ -95,12 +95,13 @@ environments {
 }
 
 // log4j configuration
+def logPathFromSysenv = System.getenv("BBB_LOGPATH")
 log4j = {
     appenders {
         appender new org.apache.log4j.DailyRollingFileAppender(
                    name: "dailyRollingFileAppender",
                    datePattern: "'.'yyyy-MM-dd",
-                   file: "${BBB_LOGPATH}/bbb-web.log",
+                   file: "$logPathFromSysenv/bbb-web.log",
                    encoding:"utf-8",
                    threshold:org.apache.log4j.Level.toLevel( config.appLogLevel ),
                    layout:pattern(conversionPattern: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5p %c %x - %m%n"))

@@ -6,8 +6,6 @@ version = '0.9.0'
 jar.enabled = true
 archivesBaseName = 'sip' 
 
-ant.mkdir(dir: "${buildDir}/${archivesBaseName}")
-
 task resolveDeps(type: Copy) {
     into('lib')
     from configurations.default
@@ -20,7 +18,10 @@ repositories {
 }
 
 
-dependencies {	 
+dependencies {
+  // first bbb libraries (check for latest version!)
+  compile 'org.bigbluebutton:bbb-common-message_2.12:0.0.19-SNAPSHOT'
+
   // Servlet
   providedCompile 'javax.servlet:servlet-api:2.5@jar'
 
@@ -64,7 +65,7 @@ dependencies {
   compile 'com.google.code.gson:gson:2.5'
 
   compile 'org.apache.commons:commons-lang3:3.7'
-  compile 'org.bigbluebutton:bbb-common-message_2.12:0.0.19-SNAPSHOT'
+
 }
 
 test {
@@ -72,18 +73,21 @@ test {
 }
 
 war.doLast {
-  ant.unzip(src: war.archivePath, dest: "$buildDir/sip")
+  ant.unzip(src: war.archivePath, dest: "$buildDir/$archivesBaseName")
 }
 
 
 task deploy() {
-  println 'Entering *deploy* step'
-  def red5AppsDir = System.getenv("RED5APPSDIR")
-  def sipDir = new File("${red5AppsDir}/video")
-  println "Deleting $sipDir"
-  if (sipDir.exists()) ant.delete(dir: sipDir)
-  ant.mkdir(dir: sipDir)
-  ant.copy(todir: sipDir) {
-    fileset(dir: "$buildDir/sip")
+  doLast {
+    println 'Entering *deploy* step'
+    def myappsDir = System.getenv("RED5APPSDIR")
+    def targetDir = new File("${myappsDir}/$archivesBaseName")
+    println "cleaning up target deploy directory $targetDir"
+    if (targetDir.exists()) ant.delete(dir: targetDir)
+    ant.mkdir(dir: targetDir)
+    ant.copy(todir: targetDir) {
+      fileset(dir: "$buildDir/$archivesBaseName")
+    }
+    ant.copy file: war.archivePath, todir: targetDir
   }
 }

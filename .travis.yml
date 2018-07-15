@@ -34,23 +34,23 @@ cache:
 
 env:
   global:
-  - RED5BASEDIR=$TRAVIS_BUILD_DIR/var_lib_red5
-  - RED5APPSDIR=$RED5BASEDIR/webapps
-  - HTML5METEOR=$HOME/html5meteor
+  - BUILD_DIRECTORY=$TRAVIS_BUILD_DIR/build_results
+  - RED5APPSDIR=$BUILD_DIRECTORY/red5/webapps
+  - TOMCATAPPSDIR=$BUILD_DIRECTORY/tomcat/webapps
+  - HTML5METEOR=$BUILD_DIRECTORY/html5meteor
   - METEOR_DEBUG_BUILD=1
-  - BBB_LOGPATH=$RED5BASEDIR/logs
+  - BBB_LOGPATH=$BUILD_DIRECTORY/logs
 
 before_install:
 - curl -s http://get.sdkman.io | bash
 - echo sdkman_auto_answer=true > ~/.sdkman/etc/config
 - source "/home/travis/.sdkman/bin/sdkman-init.sh"
 - sdk install grails 2.5.2
-- mkdir -pv $HOME/build
-- mkdir -pv $HTML5METEOR
-- mkdir -pv $RED5BASEDIR
 - mkdir -pv $RED5APPSDIR
-- mkdir -pv BBB_LOGPATH
-- echo Created directories
+- mkdir -pv $TOMCATAPPSDIR
+- mkdir -pv $HTML5METEOR
+- mkdir -pv $BBB_LOGPATH
+- echo done creating directories
 - ls -l $HOME && df -h
   #
   # removing some stuff to save space (see below, we ran into disk space issues earlier
@@ -140,11 +140,11 @@ script:
 - travis_wait 50 meteor build $HTML5METEOR --directory --server-only --architecture=os.linux.x86_64
 #- cd $HTML5METEOR/bundle/programs/server && npm install --production
  #
-- ls -rtl $RED5BASEDIR
+- ls -Rrtl $BUILD_DIRECTORY
 
 before_deploy:
-- cd $HOME/build
-- tar -cvf red5webapps.tar $RED5APPDIR
+- cd $BUILD_DIRECTORY
+- tar -cvf red5webapps.tar $RED5APPSDIR
 - tar -cvf bbb_javalibs.tar $HOME/.ivy2
 - tar -cvf bbb-html5.tar $HTML5METEOR
 - ls -al && df -h

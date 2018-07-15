@@ -6,7 +6,6 @@ version = '0.9.0'
 jar.enabled = true
 archivesBaseName = 'video'
 
-ant.mkdir(dir: "${buildDir}/${archivesBaseName}")
 
 task resolveDeps(type: Copy) {
     into('lib')
@@ -74,15 +73,18 @@ war.doLast {
   ant.unzip(src: war.archivePath, dest: "$buildDir/video")
 }
 
-
-task deploy() << {
-  println "Entering *deploy* step"
-  def red5AppsDir = System.getenv("RED5APPSDIR")
-  def videoDir = new File("${red5AppsDir}/video")
-  if (videoDir.exists()) ant.delete(dir: videoDir)
-  ant.mkdir(dir: videoDir)
-  ant.copy(todir: videoDir) {
-    fileset(dir: "$buildDir/video")
-  }
-} 
+task deploy() {
+    doLast {
+        println 'Entering *deploy* step'
+        def myappsDir = System.getenv("RED5APPSDIR")
+        def targetDir = new File("${myappsDir}/$archivesBaseName")
+        println "cleaning up target deploy directory $targetDir"
+        if (targetDir.exists()) ant.delete(dir: targetDir)
+        ant.mkdir(dir: targetDir)
+        ant.copy(todir: targetDir) {
+            fileset(dir: "$buildDir/$archivesBaseName")
+        }
+        ant.copy file: war.archivePath, todir: targetDir
+    }
+}
 
