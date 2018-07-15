@@ -21,7 +21,7 @@ addons:
     - sourceline: 'ppa:groovy-dev/grails'
     packages:
     - gradle-4.7
-    - grails-2.2
+    - grails-2.2.0
 
 
 cache:
