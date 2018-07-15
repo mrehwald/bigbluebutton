@@ -7,8 +7,9 @@ version = '0.9.0'
 jar.enabled = true
 
 def appName = 'bigbluebutton'
+archivesBaseName = appName
 
-archivesBaseName = appName 
+ant.mkdir(dir: "${buildDir}/${archivesBaseName}")
 
 task resolveDeps(type: Copy) {
     into('lib')
@@ -79,7 +80,7 @@ war.doLast {
 task deploy()  {
   println "Entering *deploy* step"
   def red5AppsDir = System.getenv("RED5APPSDIR")
-  def bbbDir = new File("${red5AppsDir}/$appName")
+  bbbDir = "${red5AppsDir}/$appName"
   ant.delete(dir: bbbDir)
   ant.mkdir(dir: bbbDir)
   ant.copy(todir: bbbDir) {

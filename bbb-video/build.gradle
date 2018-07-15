@@ -4,7 +4,9 @@ apply plugin: 'eclipse'
 
 version = '0.9.0'
 jar.enabled = true
-archivesBaseName = 'video' 
+archivesBaseName = 'video'
+
+ant.mkdir(dir: "${buildDir}/${archivesBaseName}")
 
 task resolveDeps(type: Copy) {
     into('lib')
@@ -76,7 +78,7 @@ war.doLast {
 task deploy() << {
   println "Entering *deploy* step"
   def red5AppsDir = System.getenv("RED5APPSDIR")
-  def videoDir = new File("${red5AppsDir}/video")
+  videoDir = "${red5AppsDir}/video"
   if (videoDir.exists()) ant.delete(dir: videoDir)
   ant.mkdir(dir: videoDir)
   ant.copy(todir: videoDir) {
