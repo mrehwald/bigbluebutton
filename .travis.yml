@@ -43,7 +43,7 @@ before_install:
 - curl -s http://get.sdkman.io | bash
 - echo sdkman_auto_answer=true > ~/.sdkman/etc/config
 - source "/home/travis/.sdkman/bin/sdkman-init.sh"
-- sdk install grails 2.4.5
+- sdk install grails 2.5.4
 - mkdir -pv $HOME/build
 - mkdir -pv $HTML5METEOR
 - mkdir -pv $RED5BASEDIR

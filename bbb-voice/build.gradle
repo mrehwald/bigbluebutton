@@ -79,7 +79,7 @@ war.doLast {
 task deploy() {
   println 'Entering *deploy* step'
   def red5AppsDir = System.getenv("RED5APPSDIR")
-  sipDir = "${red5AppsDir}/sip"
+  def sipDir = new File("${red5AppsDir}/video")
   println "Deleting $sipDir"
   if (sipDir.exists()) ant.delete(dir: sipDir)
   ant.mkdir(dir: sipDir)

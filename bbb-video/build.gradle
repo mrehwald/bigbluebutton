@@ -78,7 +78,7 @@ war.doLast {
 task deploy() << {
   println "Entering *deploy* step"
   def red5AppsDir = System.getenv("RED5APPSDIR")
-  videoDir = "${red5AppsDir}/video"
+  def videoDir = new File("${red5AppsDir}/video")
   if (videoDir.exists()) ant.delete(dir: videoDir)
   ant.mkdir(dir: videoDir)
   ant.copy(todir: videoDir) {
