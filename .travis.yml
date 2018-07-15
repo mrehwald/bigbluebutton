@@ -117,8 +117,8 @@ script:
 - cd $TRAVIS_BUILD_DIR/bigbluebutton-web
 - /usr/lib/gradle/4.7/bin/gradle clean
 - /usr/lib/gradle/4.7/bin/gradle resolveDeps
-- /usr/lib/gradle/4.7/bin/grails clean
-- /usr/lib/gradle/4.7/bin/grails war
+- grails clean
+- grails war
 - ls -rtl
 - /usr/lib/gradle/4.7/bin/gradle deploy
   #
