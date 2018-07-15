@@ -49,7 +49,7 @@ before_install:
 - mkdir -pv $HTML5METEOR
 - mkdir -pv $RED5BASEDIR
 - mkdir -pv $RED5APPSDIR
-- mkdie -pv BBB_LOGPATH
+- mkdir -pv BBB_LOGPATH
 - echo Created directories
 - ls -l $HOME && df -h
   #
