@@ -75,14 +75,16 @@ war.doLast {
 }
 
 
-task deploy() << {
-	def red5AppsDir = '/usr/share/red5/webapps'
-	def sipDir = new File("${red5AppsDir}/sip")
-	println "Deleting $sipDir"
-	if (sipDir.exists()) ant.delete(dir: sipDir)
-	ant.mkdir(dir: sipDir)
-	ant.copy(todir: sipDir) {
-    	fileset(dir: "$buildDir/sip")
-    }
-} 
+task deploy() {
+  println 'Entering *deploy* step'
+  def red5AppsDir = System.getenv("RED5APPSDIR")
+  def sipDir = new File("${red5AppsDir}/sip")
+  println "Deleting $sipDir"
+  if (sipDir.exists()) ant.delete(dir: sipDir)
+  ant.mkdir(dir: sipDir)
+  ant.copy(todir: sipDir) {
+    fileset(dir: "$buildDir/sip")
+  }
+}
+
 

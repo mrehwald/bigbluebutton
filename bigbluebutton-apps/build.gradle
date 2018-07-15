@@ -76,12 +76,13 @@ war.doLast {
 }
 
 
-task deploy() << {
-  def red5AppsDir = '/usr/share/red5/webapps'
+task deploy()  {
+  println "Entering *deploy* step"
+  def red5AppsDir = System.getenv("RED5APPSDIR")
   def bbbDir = new File("${red5AppsDir}/$appName")
   ant.delete(dir: bbbDir)
   ant.mkdir(dir: bbbDir)
   ant.copy(todir: bbbDir) {
     fileset(dir: "$buildDir/$appName")
   }
-} 
+}
