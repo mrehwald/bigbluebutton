@@ -50,3 +50,14 @@ test {
 	useTestNG()
 }
 
+task deploy() {
+	println 'Entering *deploy* step'
+	def red5AppsDir = System.getenv("RED5APPSDIR")
+	def webDir = new File("${red5AppsDir}/web")
+	println "Deleting $webDir"
+	if (webDir.exists()) ant.delete(dir: webDir)
+	ant.mkdir(dir: webDir)
+	ant.copy(todir: webDir) {
+		fileset(dir: "$buildDir")
+	}
+}
