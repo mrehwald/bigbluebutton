@@ -38,7 +38,7 @@ env:
   - RED5APPSDIR=$RED5BASEDIR/webapps
   - HTML5METEOR=$HOME/html5meteor
   - METEOR_DEBUG_BUILD=1
-  - BBB_LOGPATH=$RED5APPSDIR/logs
+  - BBB_LOGPATH=$RED5BASEDIR/logs
 
 before_install:
 - curl -s http://get.sdkman.io | bash
