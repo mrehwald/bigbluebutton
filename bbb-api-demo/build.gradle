@@ -17,6 +17,7 @@ war {
    baseName = 'demo' 
    version = ''
 }
+
 dependencies {
 
 	  compile group: 'commons-codec', name: 'commons-codec', version: '1.4'
@@ -26,4 +27,20 @@ dependencies {
 	  compile group: 'commons-lang', name: 'commons-lang', version: '2.5'
 	  compile 'com.google.code.gson:gson:2.2.2'
           compile 'org.expressme:JOpenId:1.08'
+}
+
+
+task deploy() {
+    doLast {
+        println 'Entering *deploy* step'
+        def myappsDir = System.getenv("TOMCATAPPSDIR")
+        def targetDir = new File("${myappsDir}/$archivesBaseName")
+        println "cleaning up target deploy directory $targetDir"
+        if (targetDir.exists()) ant.delete(dir: targetDir)
+        ant.mkdir(dir: targetDir)
+        ant.copy(todir: targetDir) {
+            fileset(dir: "$buildDir/$archivesBaseName")
+        }
+        ant.copy file: war.archivePath, todir: targetDir
+    }
 }

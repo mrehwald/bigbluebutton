@@ -75,12 +75,17 @@ war.doLast {
 }
 
 
-task deploy() << {
-	def red5AppsDir = '/usr/share/red5/webapps'
-	def videoDir = new File("${red5AppsDir}/video-broadcast")
-	if (videoDir.exists()) ant.delete(dir: videoDir)
-	ant.mkdir(dir: videoDir)
-	ant.copy(todir: videoDir) {
-		fileset(dir: "$buildDir/video-broadcast")
+task deploy() {
+	doLast {
+		println 'Entering *deploy* step'
+		def myappsDir = System.getenv("RED5APPSDIR")
+		def targetDir = new File("${myappsDir}/$archivesBaseName")
+		println "cleaning up target deploy directory $targetDir"
+		if (targetDir.exists()) ant.delete(dir: targetDir)
+		ant.mkdir(dir: targetDir)
+		ant.copy(todir: targetDir) {
+			fileset(dir: "$buildDir/$archivesBaseName")
+		}
+		ant.copy file: war.archivePath, todir: targetDir
 	}
 }

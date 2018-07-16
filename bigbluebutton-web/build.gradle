@@ -54,13 +54,16 @@ test {
 }
 
 task deploy() {
-	println 'Entering *deploy* step'
-	def red5AppsDir = System.getenv("RED5APPSDIR")
-	def webDir = new File("${red5AppsDir}/web")
-	println "Deleting $webDir"
-	if (webDir.exists()) ant.delete(dir: webDir)
-	ant.mkdir(dir: webDir)
-	ant.copy(todir: webDir) {
-		fileset(dir: "$buildDir")
+	doLast {
+		println 'Entering *deploy* step'
+		def myappsDir = System.getenv("TOMCATAPPSDIR")
+		def targetDir = new File("${myappsDir}/$archivesBaseName")
+		println "cleaning up target deploy directory $targetDir"
+		if (targetDir.exists()) ant.delete(dir: targetDir)
+		ant.mkdir(dir: targetDir)
+		ant.copy(todir: targetDir) {
+			fileset(dir: "$buildDir/$archivesBaseName")
+		}
+		ant.copy file: war.archivePath, todir: targetDir
 	}
 }
