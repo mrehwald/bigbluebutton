@@ -143,7 +143,6 @@ script:
 - travis_wait 50 meteor build $HTML5METEOR --directory --server-only --architecture=os.linux.x86_64
   #- cd $HTML5METEOR/bundle/programs/server && npm install --production
   #
-- ls -Rrtl $BUILD_DIRECTORY
 
 before_deploy:
 - cd $BUILD_DIRECTORY
