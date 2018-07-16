@@ -80,12 +80,12 @@ task deploy() {
   doLast {
     println 'Entering *deploy* step'
     def myappsDir = System.getenv("RED5APPSDIR")
-    def targetDir = new File("${myappsDir}/$archivesBaseName")
+    def targetDir = new File("$myappsDir/$appName")
     println "cleaning up target deploy directory $targetDir"
     if (targetDir.exists()) ant.delete(dir: targetDir)
     ant.mkdir(dir: targetDir)
     //   ant.copy(todir: targetDir) {
-    //     fileset(dir: "$buildDir/$archivesBaseName")
+    //     fileset(dir: "$buildDir/$appName")
 //    }
     ant.copy file: war.archivePath, todir: targetDir
   }

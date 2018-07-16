@@ -44,6 +44,9 @@ env:
   - BBB_LOGPATH=$BUILD_DIRECTORY/logs
 
 before_install:
+- echo ***************************
+- echo bbb travis build script v19
+- echo ***************************
 - curl -s http://get.sdkman.io | bash
 - echo sdkman_auto_answer=true > ~/.sdkman/etc/config
 - source "/home/travis/.sdkman/bin/sdkman-init.sh"
@@ -145,7 +148,8 @@ script:
 before_deploy:
 - cd $BUILD_DIRECTORY
 - tar -cvf red5webapps.tar $RED5APPSDIR
+- tar -cvf tomcatwebapps.tar $TOMCATAPPSDIR
 - tar -cvf bbb_javalibs.tar $HOME/.ivy2
 - tar -cvf bbb-html5.tar $HTML5METEOR
-- ls -al && df -h
+- find ./ -maxdepth 3 -type d -exec ls -l {} \; -print
 
