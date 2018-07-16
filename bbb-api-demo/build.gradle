@@ -38,9 +38,9 @@ task deploy() {
         println "cleaning up target deploy directory $targetDir"
         if (targetDir.exists()) ant.delete(dir: targetDir)
         ant.mkdir(dir: targetDir)
-        ant.copy(todir: targetDir) {
-            fileset(dir: "$buildDir/$archivesBaseName")
-        }
+ //       ant.copy(todir: targetDir) {
+ //           fileset(dir: "$buildDir/$archivesBaseName")
+ //       }
         ant.copy file: war.archivePath, todir: targetDir
     }
 }
