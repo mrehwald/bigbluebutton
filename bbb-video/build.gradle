@@ -70,7 +70,7 @@ test {
 }
 
 //war.doLast {
-//  ant.unzip(src: war.archivePath, dest: "$buildDir/video")
+//  ant.unzip(src: war.archivePath, dest: "$buildDir/$archivesBaseName")
 //}
 
 task deploy() {
