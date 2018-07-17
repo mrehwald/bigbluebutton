@@ -119,12 +119,16 @@ environments {
 def logPathFromSysenv = System.getenv("BBB_LOGPATH")
 log4j.main = {
     appenders {
-        rollingFile name:"logfile",
-                maxFileSize:1000000,
-                ile: "$logPathFromSysenv/bbb-lti.log",
-                layout:pattern(conversionPattern: '%d{[dd.MM.yy HH:mm:ss.SSS]} %-5p %c %x - %m%n')
-        console name:'console',
-                layout:pattern(conversionPattern: '%d{[dd.MM.yy HH:mm:ss.SSS]} %-5p %c %x - %m%n')
+        appender new org.apache.log4j.DailyRollingFileAppender(
+                name: "dailyRollingFileAppender",
+                datePattern: "'.'yyyy-MM-dd",
+                file: "$logPathFromSysenv/bbb-lti.log",
+                encoding:"utf-8",
+                threshold:org.apache.log4j.Level.toLevel( config.appLogLevel ),
+                layout:pattern(conversionPattern: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5p %c %x - %m%n"))
+        console name:'consoleAppender',
+                threshold:org.apache.log4j.Level.toLevel( config.appLogLevel ),
+                layout:pattern(conversionPattern: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5p %c %x - %m%n")
         'null' name:'stacktrace'
     }
 
