@@ -2,9 +2,11 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'eclipse'
 
-version = '0.9.0'
 jar.enabled = true
-archivesBaseName = 'sip' 
+
+version = '0.9.0'
+def appName = 'sip'
+archivesBaseName = appName
 
 task resolveDeps(type: Copy) {
     into('lib')

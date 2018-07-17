@@ -3,9 +3,10 @@ apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 
-version = '0.9.0'
+
 jar.enabled = true
 
+version = '0.9.0'
 def appName = 'bigbluebutton'
 archivesBaseName = appName
 
@@ -80,12 +81,12 @@ task deploy() {
   doLast {
     println 'Entering *deploy* step'
     def myappsDir = System.getenv("RED5APPSDIR")
-    def targetDir = new File("$myappsDir/$appName")
+    def targetDir = new File("${myappsDir}/$archivesBaseName")
     println "cleaning up target deploy directory $targetDir"
     if (targetDir.exists()) ant.delete(dir: targetDir)
     ant.mkdir(dir: targetDir)
     //   ant.copy(todir: targetDir) {
-    //     fileset(dir: "$buildDir/$appName")
+    //     fileset(dir: "${buildDir}/$archivesBaseName")
 //    }
     ant.copy file: war.archivePath, todir: targetDir
   }
