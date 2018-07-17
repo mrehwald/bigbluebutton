@@ -99,7 +99,7 @@ script:
 - /usr/lib/gradle/4.7/bin/gradle deploy
   #
 - echo building bbb-video
-- cd $TRAVIS_BUILD_DIR/bbb-voice
+- cd $TRAVIS_BUILD_DIR/bbb-video
 - /usr/lib/gradle/4.7/bin/gradle clean
 - /usr/lib/gradle/4.7/bin/gradle resolveDeps
 - /usr/lib/gradle/4.7/bin/gradle war
@@ -107,7 +107,7 @@ script:
 - /usr/lib/gradle/4.7/bin/gradle deploy
   #
 - echo building bigbluebutton-apps
-- cd $TRAVIS_BUILD_DIR/bbb-voice
+- cd $TRAVIS_BUILD_DIR/bigbluebutton-apps
 - /usr/lib/gradle/4.7/bin/gradle clean
 - /usr/lib/gradle/4.7/bin/gradle resolveDeps
 - /usr/lib/gradle/4.7/bin/gradle war
@@ -129,7 +129,7 @@ script:
 - grails clean
 - grails compile
 - grails war
-- ls -rtl
+- ls -rtlR target
 - /usr/lib/gradle/4.7/bin/gradle deploy
   #
   # building the html5 meteor backend and (web-(client
