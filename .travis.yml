@@ -1,11 +1,12 @@
 branches:
   only:
   - 'v2.2-dev'
-  - 'mr_private/MR-v2.2-dev-playground'
+#  - 'mr_private/MR-v2.2-dev-playground'
+  - 'travis_playground'
 
 language: scala
 scala:
-- 20.10.4
+#- 20.10.4
 - 2.12.7
 
 jdk:
@@ -45,8 +46,8 @@ env:
 
 before_install:
 - echo '***************************' && echo 'bbb travis build script v19' && echo '***************************'
-- curl -s http://get.sdkman.io | bash
-- echo sdkman_auto_answer=true > ~/.sdkman/etc/config && source "/home/travis/.sdkman/bin/sdkman-init.sh" && sdk install grails 2.5.2
+#- curl -s http://get.sdkman.io | bash
+#- echo sdkman_auto_answer=true > ~/.sdkman/etc/config && source "/home/travis/.sdkman/bin/sdkman-init.sh" && sdk install grails 2.5.2
 - mkdir -pv $RED5APPSDIR
 - mkdir -pv $TOMCATAPPSDIR
 - mkdir -pv $HTML5METEOR
@@ -56,120 +57,120 @@ before_install:
   #
   # removing some stuff to save space (see below, we ran into disk space issues earlier
   #
-- sudo sudo apt-get -y purge postgresql-9.2
-- sudo sudo apt-get -y purge postgresql-9.3
-- sudo sudo apt-get -y purge postgresql-9.4
-- sudo sudo apt-get -y purge postgresql-9.5
-- sudo sudo apt-get -y purge postgresql-9.6
-- sudo sudo apt-get -y purge postgresql-common
-- sudo apt -y purge mysql-server-5.6
-- sudo apt -y autoremove
+#- sudo sudo apt-get -y purge postgresql-9.2
+#- sudo sudo apt-get -y purge postgresql-9.3
+#- sudo sudo apt-get -y purge postgresql-9.4
+#- sudo sudo apt-get -y purge postgresql-9.5
+#- sudo sudo apt-get -y purge postgresql-9.6
+#- sudo sudo apt-get -y purge postgresql-common
+#- sudo apt -y purge mysql-server-5.6
+#- sudo apt -y autoremove
 
 script:
   # libraries
 - cd $TRAVIS_BUILD_DIR/bbb-common-message && sbt clean update  publishLocal
 - cd $TRAVIS_BUILD_DIR/bbb-common-web && sbt clean update  publishLocal
 - cd $TRAVIS_BUILD_DIR/bbb-apps-common && sbt clean update  publishLocal
-- cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean update  publishLocal
+#- cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean update  publishLocal
 # packages
 - cd $TRAVIS_BUILD_DIR/akka-bbb-apps && sbt clean update package  publishLocal
-- cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean update package  publishLocal
-- cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean update package  publishLocal
-#//todo: package content od target directory
-  #
-  # cleaning up sources of already built libraries as we ran into 'No Space Left on Device' issues at some point about here
-  #
-- rm -rf $TRAVIS_BUILD_DIR/bbb-common-message
-- rm -rf $TRAVIS_BUILD_DIR/bbb-common-web
-- rm -rf $TRAVIS_BUILD_DIR/bbb-apps-common
-- rm -rf $TRAVIS_BUILD_DIR/bbb-fsesl-client
-- rm -rf $TRAVIS_BUILD_DIR/akka-bbb-apps
-- rm -rf $TRAVIS_BUILD_DIR/akka-bbb-fsesl
-- rm -rf TRAVIS_BUILD_DIR/akka-bbb-transcode
-  #
-  # building the core backend applications
-  #
-- echo building bbb-voice
-- cd $TRAVIS_BUILD_DIR/bbb-voice
-- /usr/lib/gradle/4.7/bin/gradle clean
-- /usr/lib/gradle/4.7/bin/gradle resolveDeps
-- /usr/lib/gradle/4.7/bin/gradle war
-- /usr/lib/gradle/4.7/bin/gradle deploy
-  #
-- echo building bbb-video
-- cd $TRAVIS_BUILD_DIR/bbb-video
-- /usr/lib/gradle/4.7/bin/gradle clean
-- /usr/lib/gradle/4.7/bin/gradle resolveDeps
-- /usr/lib/gradle/4.7/bin/gradle war
-- /usr/lib/gradle/4.7/bin/gradle deploy
-  #
-- echo building bigbluebutton-apps
-- cd $TRAVIS_BUILD_DIR/bigbluebutton-apps
-- /usr/lib/gradle/4.7/bin/gradle clean
-- /usr/lib/gradle/4.7/bin/gradle resolveDeps
-- /usr/lib/gradle/4.7/bin/gradle war
-- /usr/lib/gradle/4.7/bin/gradle deploy
-  #
-- rm -rf TRAVIS_BUILD_DIR/bbb-voice
-- rm -rf TRAVIS_BUILD_DIR/bbb-video
-- rm -rf TRAVIS_BUILD_DIR/bigbluebutton-apps
-  #
-  # building tomcat core webapp (server+api)
-  #
-- echo 'building web app'
-- cd $TRAVIS_BUILD_DIR/bigbluebutton-web
-  #//todo: sheck version upgrade latest grails2 and grails3 - grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
-- /usr/lib/gradle/4.7/bin/gradle properties
-- /usr/lib/gradle/4.7/bin/gradle clean
-- /usr/lib/gradle/4.7/bin/gradle resolveDeps
-- grails clean
-- grails compile
-- grails war
-- /usr/lib/gradle/4.7/bin/gradle deploy
-#//todo: move grails compile into gradle (grails plugin)
+#- cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean update package  publishLocal
+#- cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean update package  publishLocal
+##//todo: package content od target directory
+#  #
+#  # cleaning up sources of already built libraries as we ran into 'No Space Left on Device' issues at some point about here
+#  #
+#- rm -rf $TRAVIS_BUILD_DIR/bbb-common-message
+#- rm -rf $TRAVIS_BUILD_DIR/bbb-common-web
+#- rm -rf $TRAVIS_BUILD_DIR/bbb-apps-common
+#- rm -rf $TRAVIS_BUILD_DIR/bbb-fsesl-client
+#- rm -rf $TRAVIS_BUILD_DIR/akka-bbb-apps
+#- rm -rf $TRAVIS_BUILD_DIR/akka-bbb-fsesl
+#- rm -rf TRAVIS_BUILD_DIR/akka-bbb-transcode
+#  #
+#  # building the core backend applications
+#  #
+#- echo building bbb-voice
+#- cd $TRAVIS_BUILD_DIR/bbb-voice
+#- /usr/lib/gradle/4.7/bin/gradle clean
+#- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+#- /usr/lib/gradle/4.7/bin/gradle war
+#- /usr/lib/gradle/4.7/bin/gradle deploy
+#  #
+#- echo building bbb-video
+#- cd $TRAVIS_BUILD_DIR/bbb-video
+#- /usr/lib/gradle/4.7/bin/gradle clean
+#- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+#- /usr/lib/gradle/4.7/bin/gradle war
+#- /usr/lib/gradle/4.7/bin/gradle deploy
+#  #
+#- echo building bigbluebutton-apps
+#- cd $TRAVIS_BUILD_DIR/bigbluebutton-apps
+#- /usr/lib/gradle/4.7/bin/gradle clean
+#- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+#- /usr/lib/gradle/4.7/bin/gradle war
+#- /usr/lib/gradle/4.7/bin/gradle deploy
+#  #
+#- rm -rf TRAVIS_BUILD_DIR/bbb-voice
+#- rm -rf TRAVIS_BUILD_DIR/bbb-video
+#- rm -rf TRAVIS_BUILD_DIR/bigbluebutton-apps
+#  #
+#  # building tomcat core webapp (server+api)
+#  #
+#- echo 'building web app'
+#- cd $TRAVIS_BUILD_DIR/bigbluebutton-web
+#  #//todo: sheck version upgrade latest grails2 and grails3 - grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
+#- /usr/lib/gradle/4.7/bin/gradle properties
+#- /usr/lib/gradle/4.7/bin/gradle clean
+#- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+#- grails clean
+#- grails compile
+#- grails war
+#- /usr/lib/gradle/4.7/bin/gradle deploy
+##//todo: move grails compile into gradle (grails plugin)
+##
+#- echo 'building API demo'
+#- cd $TRAVIS_BUILD_DIR/bbb-api-demo
+#- /usr/lib/gradle/4.7/bin/gradle clean
+#- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+#- /usr/lib/gradle/4.7/bin/gradle war
+#- /usr/lib/gradle/4.7/bin/gradle deploy
+##
+#- echo 'building bbb-lti service'
+#- cd $TRAVIS_BUILD_DIR/bbb-lti
+#  #- grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
+#- grails clean
+#- grails compile
+#- grails war
+##
+##- echo 'building deskshare app'
+##- cd $TRAVIS_BUILD_DIR/deskshare
+##- /usr/lib/gradle/4.7/bin/gradle clean
+##- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+##- /usr/lib/gradle/4.7/bin/gradle war
+##- /usr/lib/gradle/4.7/bin/gradle deploy
+##
 #
-- echo 'building API demo'
-- cd $TRAVIS_BUILD_DIR/bbb-api-demo
-- /usr/lib/gradle/4.7/bin/gradle clean
-- /usr/lib/gradle/4.7/bin/gradle resolveDeps
-- /usr/lib/gradle/4.7/bin/gradle war
-- /usr/lib/gradle/4.7/bin/gradle deploy
-#
-- echo 'building bbb-lti service'
-- cd $TRAVIS_BUILD_DIR/bbb-lti
-  #- grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
-- grails clean
-- grails compile
-- grails war
-#
-- echo 'building deskshare app'
-- cd $TRAVIS_BUILD_DIR/deskshare
-- /usr/lib/gradle/4.7/bin/gradle clean
-- /usr/lib/gradle/4.7/bin/gradle resolveDeps
-- /usr/lib/gradle/4.7/bin/gradle war
-- /usr/lib/gradle/4.7/bin/gradle deploy
-#
-
-- find $BUILD_DIRECTORY -maxdepth 3 -type d -exec ls -l {} \; -print
-  #
-  # building the html5 meteor backend and (web-(client
-  #
-- cd $HOME && curl https://install.meteor.com | sh
-- cd $TRAVIS_BUILD_DIR/bigbluebutton-html5 && meteor npm install && meteor npm install @babel/runtime
-  #   - meteor remove standard-minifier-js
-  # make active in case minifier causes travis to time out again (this thing takes loooong
-- cd $TRAVIS_BUILD_DIR/bigbluebutton-html5
-- meteor remove standard-minifier-js
-- meteor build $HTML5METEOR --directory --server-only --architecture=os.linux.x86_64
-  #- cd $HTML5METEOR/bundle/programs/server && npm install --production
-  #
+#- find $BUILD_DIRECTORY -maxdepth 3 -type d -exec ls -l {} \; -print
+#  #
+#  # building the html5 meteor backend and (web-(client
+#  #
+#- cd $HOME && curl https://install.meteor.com | sh
+#- cd $TRAVIS_BUILD_DIR/bigbluebutton-html5 && meteor npm install && meteor npm install @babel/runtime
+#  #   - meteor remove standard-minifier-js
+#  # make active in case minifier causes travis to time out again (this thing takes loooong
+#- cd $TRAVIS_BUILD_DIR/bigbluebutton-html5
+#- meteor remove standard-minifier-js
+#- meteor build $HTML5METEOR --directory --server-only --architecture=os.linux.x86_64
+#  #- cd $HTML5METEOR/bundle/programs/server && npm install --production
+#  #
 
 before_deploy:
 - cd $BUILD_DIRECTORY
 - tar -cvf red5webapps.tar $RED5APPSDIR
-- tar -cvf tomcatwebapps.tar $TOMCATAPPSDIR
-- tar -cvf bbb_javalibs.tar $HOME/.ivy2
-- tar -cvf bbb-html5.tar $HTML5METEOR
+#- tar -cvf tomcatwebapps.tar $TOMCATAPPSDIR
+#- tar -cvf bbb_javalibs.tar $HOME/.ivy2
+#- tar -cvf bbb-html5.tar $HTML5METEOR
 - ls -rtl $BUILD_DIRECTORY
 
 deploy:
