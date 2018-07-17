@@ -1,6 +1,11 @@
 apply plugin: 'scala'
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'war'
+
+version = '0.9.0'
+def appName = 'deskshare'
+archivesBaseName = appName
 
 task resolveDeps(type: Copy) {
     into('lib')
@@ -178,3 +183,17 @@ subprojects {
     manifest.mainAttributes(provider: 'bigbluebutton')
 }
 
+task deploy() {
+	doLast {
+		println 'Entering *deploy* step'
+		def myappsDir = System.getenv("RED5APPSDIR")
+		def targetDir = new File("${myappsDir}/$archivesBaseName")
+		println "cleaning up target deploy directory $targetDir"
+		if (targetDir.exists()) ant.delete(dir: targetDir)
+		ant.mkdir(dir: targetDir)
+		//       ant.copy(todir: targetDir) {
+		//           fileset(dir: "$buildDir/$archivesBaseName")
+		//       }
+		ant.copy file: war.archivePath, todir: targetDir
+	}
+}

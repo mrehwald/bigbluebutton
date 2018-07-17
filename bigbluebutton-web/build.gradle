@@ -73,6 +73,6 @@ task deploy() {
 //		ant.copy(todir: targetDir) {
 //			fileset(dir: "$buildDir/$archivesBaseName")
 //		}
-		ant.copy file: "${builddir}/*.war", todir: targetDir
+		ant.copy file: "${buildDir}/*.war", todir: targetDir
 	}
 }

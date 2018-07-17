@@ -124,6 +124,29 @@ script:
 - grails war
 - /usr/lib/gradle/4.7/bin/gradle deploy
 #
+- echo 'building API demo'
+- cd $TRAVIS_BUILD_DIR/bbb-api-demo
+- /usr/lib/gradle/4.7/bin/gradle clean
+- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+- /usr/lib/gradle/4.7/bin/gradle war
+- /usr/lib/gradle/4.7/bin/gradle deploy
+#
+  bbb-lti
+- echo 'building bbb-lti service'
+- cd $TRAVIS_BUILD_DIR/bbb-lti
+  #- grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
+- grails clean
+- grails compile
+- grails war
+#
+- echo 'building deskshare app'
+- cd $TRAVIS_BUILD_DIR/deskshare
+- /usr/lib/gradle/4.7/bin/gradle clean
+- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+- /usr/lib/gradle/4.7/bin/gradle war
+- /usr/lib/gradle/4.7/bin/gradle deploy
+
+
 - find $BUILD_DIRECTORY -maxdepth 3 -type d -exec ls -l {} \; -print
   #
   # building the html5 meteor backend and (web-(client

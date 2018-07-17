@@ -1,5 +1,7 @@
 apply plugin: 'war'
 
+def appName = 'demo'
+archivesBaseName = appName
 version = '0.9.0'
 
 repositories {
