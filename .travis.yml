@@ -44,18 +44,14 @@ env:
   - BBB_LOGPATH=$BUILD_DIRECTORY/logs
 
 before_install:
-- echo ***************************
-- echo bbb travis build script v19
-- echo ***************************
+- echo '***************************' && echo 'bbb travis build script v19' && echo '***************************'
 - curl -s http://get.sdkman.io | bash
-- echo sdkman_auto_answer=true > ~/.sdkman/etc/config
-- source "/home/travis/.sdkman/bin/sdkman-init.sh"
-- sdk install grails 2.5.2
+- echo sdkman_auto_answer=true > ~/.sdkman/etc/config && source "/home/travis/.sdkman/bin/sdkman-init.sh" && sdk install grails 2.5.2
 - mkdir -pv $RED5APPSDIR
 - mkdir -pv $TOMCATAPPSDIR
 - mkdir -pv $HTML5METEOR
 - mkdir -pv $BBB_LOGPATH
-- echo done creating directories
+- echo 'done creating directories'
 - ls -l $HOME && df -h
   #
   # removing some stuff to save space (see below, we ran into disk space issues earlier
@@ -78,7 +74,7 @@ script:
 - cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean publish publishLocal
 - cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean publish publishLocal
   #
-  # cleaning up as we ran into 'No Space Left on Device' issues at some point about here
+  # cleaning up sources of already built libraries as we ran into 'No Space Left on Device' issues at some point about here
   #
 - rm -rf $TRAVIS_BUILD_DIR/bbb-common-message
 - rm -rf $TRAVIS_BUILD_DIR/bbb-common-web
@@ -115,9 +111,9 @@ script:
 - rm -rf TRAVIS_BUILD_DIR/bbb-video
 - rm -rf TRAVIS_BUILD_DIR/bigbluebutton-apps
   #
-  # building tomcat core webapp (api)
+  # building tomcat core webapp (server+api)
   #
-- echo building web app
+- echo 'building web app'
 - cd $TRAVIS_BUILD_DIR/bigbluebutton-web
   #- grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
 - /usr/lib/gradle/4.7/bin/gradle properties
@@ -137,7 +133,8 @@ script:
   #   - meteor remove standard-minifier-js
   # make active in case minifier causes travis to time out again (this thing takes loooong
 - cd $TRAVIS_BUILD_DIR/bigbluebutton-html5
-- travis_wait 80 meteor build $HTML5METEOR --directory --server-only --architecture=os.linux.x86_64
+- meteor remove standard-minifier-js
+- meteor build $HTML5METEOR --directory --server-only --architecture=os.linux.x86_64
   #- cd $HTML5METEOR/bundle/programs/server && npm install --production
   #
 
@@ -148,5 +145,6 @@ before_deploy:
 - tar -cvf tomcatwebapps.tar $TOMCATAPPSDIR
 - tar -cvf bbb_javalibs.tar $HOME/.ivy2
 - tar -cvf bbb-html5.tar $HTML5METEOR
+- ls -rtl
 
 
