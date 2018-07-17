@@ -48,7 +48,8 @@ dependencies {
 	// Red5
 	providedCompile 'org.red5:red5-server:1.0.10-M5@jar'
 	providedCompile 'org.red5:red5-server-common:1.0.10-M5@jar'
-	providedCompile 'org.red5:red5-io:1.0.10-M5@jar'
+	compile group: 'org.red5', name: 'red5-io', version: '1.0.10-M9'
+
 
 
 	// Logging

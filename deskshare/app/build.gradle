@@ -45,6 +45,8 @@ dependencies {
 	// Red5
 	providedCompile 'org.red5:red5-server:1.0.10-M5@jar'
 	providedCompile 'org.red5:red5-server-common:1.0.10-M5@jar'
+	compile group: 'org.red5', name: 'red5-io', version: '1.0.10-M9'
+
 
 
 	// Logging
@@ -100,17 +102,21 @@ test {
 	useTestNG() 
 }
 
-war.doLast {
-  ant.unzip(src: war.archivePath, dest: "$buildDir/deskshare")
-}
+//war.doLast {
+//  ant.unzip(src: war.archivePath, dest: "$buildDir/deskshare")
+//}
 
-task deploy() << {
-	def red5AppsDir = '/usr/share/red5/webapps'
-	def deskshareDir = new File("${red5AppsDir}/deskshare")
-	println "Deleting $deskshareDir"
-	ant.delete(dir: deskshareDir)
-	ant.mkdir(dir: deskshareDir)
-	ant.copy(todir: deskshareDir) {
-    	fileset(dir: "$buildDir/deskshare")
-    }
-} 
+task deploy() {
+	doLast {
+		println 'Entering *deploy* step'
+		def myappsDir = System.getenv("RED5APPSDIR")
+		def targetDir = new File("${myappsDir}/$archivesBaseName")
+		println "cleaning up target deploy directory $targetDir"
+		if (targetDir.exists()) ant.delete(dir: targetDir)
+		ant.mkdir(dir: targetDir)
+		//       ant.copy(todir: targetDir) {
+		//           fileset(dir: "$buildDir/$archivesBaseName")
+		//       }
+		ant.copy file: war.archivePath, todir: targetDir
+	}
+}

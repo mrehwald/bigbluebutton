@@ -117,7 +117,7 @@ environments {
 
 // log4j configuration
 def logPathFromSysenv = System.getenv("BBB_LOGPATH")
-log4j.main = {
+log4j = {
     appenders {
         appender new org.apache.log4j.DailyRollingFileAppender(
                 name: "dailyRollingFileAppender",
@@ -126,23 +126,31 @@ log4j.main = {
                 encoding:"utf-8",
                 threshold:org.apache.log4j.Level.toLevel( config.appLogLevel ),
                 layout:pattern(conversionPattern: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5p %c %x - %m%n"))
-        console name:'consoleAppender',
+        console     name:'consoleAppender',
                 threshold:org.apache.log4j.Level.toLevel( config.appLogLevel ),
                 layout:pattern(conversionPattern: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5p %c %x - %m%n")
-        'null' name:'stacktrace'
     }
 
-    debug logfile:"grails.app"
+    root {
+        warn 'dailyRollingFileAppender', 'consoleAppender'
+        additivity = true
+    }
+
+    debug  logfile:    'org.bigbluebutton.*',
+            'grails.app.controllers',
+            'grails.app.services'
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
-           'org.codehaus.groovy.grails.web.pages',          // GSP
-           'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-           'org.codehaus.groovy.grails.commons',            // core / classloading
-           'org.codehaus.groovy.grails.plugins',            // plugins
-           'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
+            'org.codehaus.groovy.grails.web.pages',          // GSP
+            'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+            'org.codehaus.groovy.grails.web.mapping',        // URL mapping
+            'org.codehaus.groovy.grails.commons',            // core / classloading
+            'org.codehaus.groovy.grails.plugins',            // plugins
+            'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+            'org.springframework',
+            'org.hibernate',
+            'net.sf.ehcache.hibernate'
+
+    debug  'org.bigbluebutton'
 }
