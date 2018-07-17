@@ -66,13 +66,18 @@ before_install:
 - sudo apt -y autoremove
 
 script:
-- cd $TRAVIS_BUILD_DIR/bbb-common-message && sbt clean publish publishLocal
-- cd $TRAVIS_BUILD_DIR/bbb-common-web && sbt clean publish publishLocal
-- cd $TRAVIS_BUILD_DIR/bbb-apps-common && sbt clean publish publishLocal
-- cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean publish publishLocal
-- cd $TRAVIS_BUILD_DIR/akka-bbb-apps && sbt clean publish publishLocal
-- cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean publish publishLocal
-- cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean publish publishLocal
+  # libraries
+- cd $TRAVIS_BUILD_DIR/bbb-common-message && sbt clean update  publishLocal
+- cd $TRAVIS_BUILD_DIR/bbb-common-web && sbt clean update  publishLocal
+- cd $TRAVIS_BUILD_DIR/bbb-apps-common && sbt clean update  publishLocal
+- cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean update  publishLocal
+# packages
+- cd $TRAVIS_BUILD_DIR/akka-bbb-apps && sbt clean update package  publishLocal
+- ls -lR target
+- cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean update package  publishLocal
+- ls -lR target
+- cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean update package  publishLocal
+- ls -lR target
   #
   # cleaning up sources of already built libraries as we ran into 'No Space Left on Device' issues at some point about here
   #
