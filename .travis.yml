@@ -73,11 +73,9 @@ script:
 - cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean update  publishLocal
 # packages
 - cd $TRAVIS_BUILD_DIR/akka-bbb-apps && sbt clean update package  publishLocal
-- ls -lR target
 - cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean update package  publishLocal
-- ls -lR target
 - cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean update package  publishLocal
-- ls -lR target
+#//todo: package content od target directory
   #
   # cleaning up sources of already built libraries as we ran into 'No Space Left on Device' issues at some point about here
   #
@@ -120,7 +118,7 @@ script:
   #
 - echo 'building web app'
 - cd $TRAVIS_BUILD_DIR/bigbluebutton-web
-  #- grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
+  #//todo: sheck version upgrade latest grails2 and grails3 - grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
 - /usr/lib/gradle/4.7/bin/gradle properties
 - /usr/lib/gradle/4.7/bin/gradle clean
 - /usr/lib/gradle/4.7/bin/gradle resolveDeps
@@ -128,6 +126,7 @@ script:
 - grails compile
 - grails war
 - /usr/lib/gradle/4.7/bin/gradle deploy
+#//todo: move grails compile into gradle (grails plugin)
 #
 - echo 'building API demo'
 - cd $TRAVIS_BUILD_DIR/bbb-api-demo

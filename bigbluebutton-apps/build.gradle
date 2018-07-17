@@ -40,7 +40,8 @@ dependencies {
   // Red5
   providedCompile 'org.red5:red5-server:1.0.10-M5@jar'
   providedCompile 'org.red5:red5-server-common:1.0.10-M5@jar'
-  
+  providedCompile 'org.red5:red5-io:1.0.10-M5@jar'
+
   // Logging
   providedCompile 'ch.qos.logback:logback-core:1.2.3@jar'
   providedCompile 'ch.qos.logback:logback-classic:1.2.3@jar'
