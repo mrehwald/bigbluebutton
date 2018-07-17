@@ -131,7 +131,6 @@ script:
 - /usr/lib/gradle/4.7/bin/gradle war
 - /usr/lib/gradle/4.7/bin/gradle deploy
 #
-  bbb-lti
 - echo 'building bbb-lti service'
 - cd $TRAVIS_BUILD_DIR/bbb-lti
   #- grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
@@ -145,7 +144,7 @@ script:
 - /usr/lib/gradle/4.7/bin/gradle resolveDeps
 - /usr/lib/gradle/4.7/bin/gradle war
 - /usr/lib/gradle/4.7/bin/gradle deploy
-
+#
 
 - find $BUILD_DIRECTORY -maxdepth 3 -type d -exec ls -l {} \; -print
   #
