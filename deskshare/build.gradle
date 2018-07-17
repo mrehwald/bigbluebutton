@@ -27,11 +27,12 @@ repositories {
  *  1. You cannot use provideCompile here as gradle will complain. But you can use it in the sub-projects.
  */
 dependencies {
-	scalaTools "org.scala-lang:scala-compiler:2.12.5"
-	compile "org.scala-lang:scala-library:2.9.2"
+	compile 'org.scala-lang:scala-library:2.11.12'
+	testCompile 'org.scalatest:scalatest_2.11:3.0.0'
+	testCompile 'junit:junit:4.12'
 
-  // Servlet
-  compile 'javax.servlet:servlet-api:2.5@jar'
+	// Servlet
+	providedCompile 'javax.servlet:servlet-api:2.5@jar'
 	
   // Mina
   compile 'org.apache.mina:mina-core:2.0.8@jar'
@@ -59,7 +60,7 @@ dependencies {
 
 	// Needed for the JVM shutdown hook but needs to be put into red5/lib dir.
 	// Otherwise we get exception on aop utils class not found.
-	compile 'org.springframework:spring-aop:4.0.8.RELEASE@jar'
+	providedCompile 'org.springframework:spring-aop:4.3.12.RELEASE@jar'
 	compile 'aopalliance:aopalliance:1.0@jar'
 	        
   // Testing
@@ -70,13 +71,7 @@ dependencies {
   compile 'commons-fileupload:commons-fileupload:1.2.2@jar'
 	compile 'commons-io:commons-io:2.1@jar' 
 		
-	// Libraries needed to run the scala tools
-	scalaTools 'org.scala-lang:scala-compiler:2.9.2'
-	scalaTools 'org.scala-lang:scala-library:2.9.2'
 
-	// Libraries needed for scala api
-	compile 'org.scala-lang:scala-library:2.9.2'
-	
 	compile 'net.lag:configgy:2.0.0@jar'
 	
 	//redis
