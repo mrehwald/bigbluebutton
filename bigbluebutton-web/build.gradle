@@ -3,7 +3,7 @@ apply plugin: 'war'
 apply plugin: 'eclipse'
 
 version = '0.9.0'
-def appName = 'bbb-server'
+def appName = 'bigbluebutton'
 archivesBaseName = appName
 
 buildDir="$projectDir/target"
@@ -73,6 +73,6 @@ task deploy() {
 //		ant.copy(todir: targetDir) {
 //			fileset(dir: "$buildDir/$archivesBaseName")
 //		}
-		ant.copy file: grails.project.war.file, todir: targetDir
+		ant.copy file: "${builddir}/*.war", todir: targetDir
 	}
 }

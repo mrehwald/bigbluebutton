@@ -95,7 +95,6 @@ script:
 - /usr/lib/gradle/4.7/bin/gradle clean
 - /usr/lib/gradle/4.7/bin/gradle resolveDeps
 - /usr/lib/gradle/4.7/bin/gradle war
-- ls -rtl
 - /usr/lib/gradle/4.7/bin/gradle deploy
   #
 - echo building bbb-video
@@ -103,7 +102,6 @@ script:
 - /usr/lib/gradle/4.7/bin/gradle clean
 - /usr/lib/gradle/4.7/bin/gradle resolveDeps
 - /usr/lib/gradle/4.7/bin/gradle war
-- ls -rtl
 - /usr/lib/gradle/4.7/bin/gradle deploy
   #
 - echo building bigbluebutton-apps
@@ -111,7 +109,6 @@ script:
 - /usr/lib/gradle/4.7/bin/gradle clean
 - /usr/lib/gradle/4.7/bin/gradle resolveDeps
 - /usr/lib/gradle/4.7/bin/gradle war
-- ls -rtl
 - /usr/lib/gradle/4.7/bin/gradle deploy
   #
 - rm -rf TRAVIS_BUILD_DIR/bbb-voice
@@ -129,8 +126,9 @@ script:
 - grails clean
 - grails compile
 - grails war
-- ls -rtlR target
 - /usr/lib/gradle/4.7/bin/gradle deploy
+#
+- find $BUILD_DIRECTORY -maxdepth 3 -type d -exec ls -l {} \; -print
   #
   # building the html5 meteor backend and (web-(client
   #
@@ -143,11 +141,12 @@ script:
   #- cd $HTML5METEOR/bundle/programs/server && npm install --production
   #
 
+
 before_deploy:
 - cd $BUILD_DIRECTORY
 - tar -cvf red5webapps.tar $RED5APPSDIR
 - tar -cvf tomcatwebapps.tar $TOMCATAPPSDIR
 - tar -cvf bbb_javalibs.tar $HOME/.ivy2
 - tar -cvf bbb-html5.tar $HTML5METEOR
-- find ./ -maxdepth 3 -type d -exec ls -l {} \; -print
+
 
