@@ -126,16 +126,19 @@ daemonUser in Linux := user
 // group which will execute the application
 daemonGroup in Linux := group
 
-mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
-    // Move the application.conf so the user can override settings here
-    val appConf = src / "main" / "resources" / "application.conf"
-    appConf -> "conf/application.conf"
+mappings in Universal += {
+  (packageBin in Compile).value
+  // we are using the reference.conf as default application.conf
+  // the user can override settings here
+  val appConf = sourceDirectory.value / "main" / "resources" / "application.conf"
+  appConf -> "conf/application.conf"
 }
 
-mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
-    // Move logback.xml so the user can override settings here
-    val logConf = src / "main" / "resources" / "logback.xml"
-    logConf -> "conf/logback.xml"
+mappings in Universal += {
+  (packageBin in Compile).value
+  // Move logback.xml so the user can override settings here
+  val logConf = sourceDirectory.value / "main" / "resources" / "logback.xml"
+  logConf -> "conf/logback.xml"
 }
 
 debianPackageDependencies in Debian ++= Seq("java7-runtime-headless", "bash")
