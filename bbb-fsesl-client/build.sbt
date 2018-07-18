@@ -19,9 +19,9 @@ testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-h", "target/sc
 
 libraryDependencies ++= {
   Seq(
-	  "org.jboss.netty"          %  "netty"             % "3.2.1.Final",
-	  "junit"                    %  "junit"             % "4.11",
-	  "ch.qos.logback"           %  "logback-classic"   % "1.0.3"
+	  "org.jboss.netty"          %  "netty"             % "3.2.10.Final",
+	  "junit"                    %  "junit"             % "4.12",
+	  "ch.qos.logback"           %  "logback-classic"   % "1.2.3"
 	)}
 
 Seq(Revolver.settings: _*)

@@ -27,13 +27,13 @@ testOptions in Test += Tests.Argument(TestFrameworks.Specs2, "html", "console", 
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-h", "target/scalatest-reports")
 
 val scalaV = "2.12.2"
-val akkaVersion  = "2.5.1"
+val akkaVersion  = "2.5.14"
 val scalaTestV  = "2.2.6"
 
 // https://mvnrepository.com/artifact/org.scala-lang/scala-library
-libraryDependencies += "org.scala-lang" % "scala-library" % "2.12.2"
+libraryDependencies += "org.scala-lang" % "scala-library" % "2.12.6"
 // https://mvnrepository.com/artifact/org.scala-lang/scala-compiler
-libraryDependencies += "org.scala-lang" % "scala-compiler" % "2.12.2"
+libraryDependencies += "org.scala-lang" % "scala-compiler" % "2.12.6"
 
 // https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor_2.12
 libraryDependencies += "com.typesafe.akka" % "akka-actor_2.12" % "2.5.1"
@@ -43,19 +43,19 @@ libraryDependencies += "com.typesafe.akka" % "akka-slf4j_2.12" % "2.5.1"
 // https://mvnrepository.com/artifact/com.github.etaty/rediscala_2.12
 libraryDependencies += "com.github.etaty" % "rediscala_2.12" % "1.8.0"
 
-libraryDependencies += "com.softwaremill.quicklens" %% "quicklens" % "1.4.8"
+libraryDependencies += "com.softwaremill.quicklens" %% "quicklens" % "1.4.11"
 
 libraryDependencies += "org.bigbluebutton" % "bbb-common-message_2.12" % "0.0.19-SNAPSHOT"
 
-libraryDependencies += "com.google.code.gson" % "gson" % "2.8.0"
+libraryDependencies += "com.google.code.gson" % "gson" % "2.8.5"
 libraryDependencies += "redis.clients" % "jedis" % "2.9.0"
 
 // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-libraryDependencies += "org.apache.commons" % "commons-lang3" % "3.5"
-libraryDependencies += "commons-io" % "commons-io" % "2.4"
-libraryDependencies += "org.apache.commons" % "commons-pool2" % "2.3"
-libraryDependencies += "commons-io" % "commons-io" % "2.4"
-libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.23" % "provided"
+libraryDependencies += "org.apache.commons" % "commons-lang3" % "3.7"
+libraryDependencies += "commons-io" % "commons-io" % "2.6"
+libraryDependencies += "org.apache.commons" % "commons-pool2" % "2.6.0"
+libraryDependencies += "commons-io" % "commons-io" % "2.6"
+libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.25" % "provided"
 
 
 libraryDependencies += "junit" % "junit" % "4.12" % "test"
@@ -67,12 +67,12 @@ libraryDependencies += "org.pegdown" % "pegdown" % "1.6.0" % "test"
 libraryDependencies += "com.typesafe.akka" % "akka-testkit_2.12" % "2.5.1" % "test"
 
 // https://mvnrepository.com/artifact/org.scalactic/scalactic_2.12
-libraryDependencies += "org.scalactic" % "scalactic_2.12" % "3.0.3" % "test"
+libraryDependencies += "org.scalactic" % "scalactic_2.12" % "3.0.5" % "test"
 
 // https://mvnrepository.com/artifact/org.scalatest/scalatest_2.12
-libraryDependencies += "org.scalatest" % "scalatest_2.12" % "3.0.3" % "test"
+libraryDependencies += "org.scalatest" % "scalatest_2.12" % "3.0.5" % "test"
 
-libraryDependencies += "org.mockito" % "mockito-core" % "2.7.22" % "test"
+libraryDependencies += "org.mockito" % "mockito-core" % "2.19.1" % "test"
 
 Seq(Revolver.settings: _*)
 

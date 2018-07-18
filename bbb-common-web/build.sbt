@@ -26,7 +26,7 @@ testOptions in Test += Tests.Argument(TestFrameworks.Specs2, "html", "console", 
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-h", "target/scalatest-reports")
 
 val scalaV = "2.12.6"
-val akkaVersion = "2.5.13"
+val akkaVersion = "2.5.14"
 
 // https://mvnrepository.com/artifact/org.scala-lang/scala-library
 libraryDependencies += "org.scala-lang" % "scala-library" % scalaV
@@ -54,9 +54,9 @@ libraryDependencies += "com.google.code.gson" % "gson" % "2.8.5"
 libraryDependencies += "org.apache.commons" % "commons-lang3" % "3.7"
 libraryDependencies += "commons-io" % "commons-io" % "2.6"
 
-libraryDependencies += "org.apache.commons" % "commons-pool2" % "2.5.0"
+libraryDependencies += "org.apache.commons" % "commons-pool2" % "2.6.0"
 libraryDependencies += "commons-io" % "commons-io" % "2.6"
-libraryDependencies += "com.zaxxer" % "nuprocess" % "1.2.3"
+libraryDependencies += "com.zaxxer" % "nuprocess" % "1.2.4"
 
 // https://mvnrepository.com/artifact/org.jodconverter/jodconverter-core
 libraryDependencies += "org.jodconverter" % "jodconverter-local" % "4.2.0"
@@ -79,7 +79,7 @@ libraryDependencies += "org.apache.poi" % "poi-ooxml" % "3.17"
 libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.25"
 
 // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
-libraryDependencies += "org.apache.httpcomponents" % "httpclient" % "4.5.5"
+libraryDependencies += "org.apache.httpcomponents" % "httpclient" % "4.5.6"
 // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpasyncclient
 libraryDependencies += "org.apache.httpcomponents" % "httpasyncclient" % "4.1.3"
 
@@ -92,7 +92,7 @@ libraryDependencies += "org.pegdown" % "pegdown" % "1.6.0" % "test"
 libraryDependencies += "junit" % "junit" % "4.12" % "test"
 libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % "test"
 // https://mvnrepository.com/artifact/org.mockito/mockito-core
-libraryDependencies += "org.mockito" % "mockito-core" % "2.19.0" % "test"
+libraryDependencies += "org.mockito" % "mockito-core" % "2.19.1" % "test"
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.5" % "test"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 
