@@ -3,6 +3,8 @@ branches:
   - 'v2.2-dev'
 #  - 'mr_private/MR-v2.2-dev-playground'
   - 'travis_playground'
+  - 'deskshare_fixes'
+  - 'scala_versionbump'
 
 language: scala
 scala:
@@ -73,7 +75,7 @@ script:
 - cd $TRAVIS_BUILD_DIR/bbb-apps-common && sbt clean update  publishLocal
 #- cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean update  publishLocal
 # packages
-- cd $TRAVIS_BUILD_DIR/akka-bbb-apps && sbt clean update package  publishLocal
+#- cd $TRAVIS_BUILD_DIR/akka-bbb-apps && sbt clean update package  publishLocal
 #- cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean update package  publishLocal
 #- cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean update package  publishLocal
 ##//todo: package content od target directory
@@ -90,13 +92,13 @@ script:
 #  #
 #  # building the core backend applications
 #  #
-#- echo building bbb-voice
-#- cd $TRAVIS_BUILD_DIR/bbb-voice
-#- /usr/lib/gradle/4.7/bin/gradle clean
-#- /usr/lib/gradle/4.7/bin/gradle resolveDeps
-#- /usr/lib/gradle/4.7/bin/gradle war
-#- /usr/lib/gradle/4.7/bin/gradle deploy
-#  #
+- echo building bbb-voice
+- cd $TRAVIS_BUILD_DIR/bbb-voice
+- /usr/lib/gradle/4.7/bin/gradle clean
+- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+- /usr/lib/gradle/4.7/bin/gradle war
+- /usr/lib/gradle/4.7/bin/gradle deploy
+  #
 #- echo building bbb-video
 #- cd $TRAVIS_BUILD_DIR/bbb-video
 #- /usr/lib/gradle/4.7/bin/gradle clean
