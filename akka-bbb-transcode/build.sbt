@@ -6,7 +6,7 @@ organization := "org.bigbluebutton"
 
 version := "0.0.2"
 
-scalaVersion  := "2.12.2"
+scalaVersion  := "2.12.7"
 
 scalacOptions ++= Seq(
   "-unchecked",
