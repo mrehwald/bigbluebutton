@@ -46,9 +46,9 @@ dependencies {
   compile 'org.springframework:spring-core:4.0.8.RELEASE@jar'
 	
 	// Red5
-	providedCompile 'org.red5:red5-server:1.0.10-M5@jar'
-	providedCompile 'org.red5:red5-server-common:1.0.10-M5@jar'
-	compile group: 'org.red5', name: 'red5-io', version: '1.0.10-M9'
+	providedCompile 'org.red5:red5-server:v1.0.8-RELEASE@jar'
+	providedCompile 'org.red5:red5-server-common:v1.0.8-RELEASE@jar'
+	compile group: 'org.red5', name: 'red5-io', version: 'v1.0.8-RELEASE'
 
 
 
