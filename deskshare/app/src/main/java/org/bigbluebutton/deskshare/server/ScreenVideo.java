@@ -77,6 +77,11 @@ public class ScreenVideo implements IVideoStreamCodec {
 		return data;
 	}
 
+	public FrameData[] getKeyframes() {
+		log.debug("!! should never get here!!");
+		// TODO Auto-generated method stub
+	}
+
     public IoBuffer getDecoderConfiguration() {
     	log.debug("getting DecoderConfiguration");
 		return data;
@@ -90,6 +95,7 @@ public class ScreenVideo implements IVideoStreamCodec {
 
 	@Override
 	public int getNumInterframes() {
+		log.debug("!! should never get here!!");
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -70,11 +70,11 @@ script:
 - cd $TRAVIS_BUILD_DIR/bbb-common-message && sbt clean update  publishLocal
 - cd $TRAVIS_BUILD_DIR/bbb-common-web && sbt clean update  publishLocal
 - cd $TRAVIS_BUILD_DIR/bbb-apps-common && sbt clean update  publishLocal
-- cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean update  publishLocal
-# packages
-- cd $TRAVIS_BUILD_DIR/akka-bbb-apps && sbt clean update package  publishLocal
-- cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean update package  publishLocal
-- cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean update package  publishLocal
+#- cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean update  publishLocal
+## packages
+#- cd $TRAVIS_BUILD_DIR/akka-bbb-apps && sbt clean update package  publishLocal
+#- cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean update package  publishLocal
+#- cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean update package  publishLocal
 #//todo: package content od target directory
   #
   # cleaning up sources of already built libraries as we ran into 'No Space Left on Device' issues at some point about here
@@ -89,58 +89,58 @@ script:
   #
   # building the core backend applications
   #
-- echo building bbb-voice
-- cd $TRAVIS_BUILD_DIR/bbb-voice
-- /usr/lib/gradle/4.7/bin/gradle clean
-- /usr/lib/gradle/4.7/bin/gradle resolveDeps
-- /usr/lib/gradle/4.7/bin/gradle war
-- /usr/lib/gradle/4.7/bin/gradle deploy
-  #
-- echo building bbb-video
-- cd $TRAVIS_BUILD_DIR/bbb-video
-- /usr/lib/gradle/4.7/bin/gradle clean
-- /usr/lib/gradle/4.7/bin/gradle resolveDeps
-- /usr/lib/gradle/4.7/bin/gradle war
-- /usr/lib/gradle/4.7/bin/gradle deploy
-  #
-- echo building bigbluebutton-apps
-- cd $TRAVIS_BUILD_DIR/bigbluebutton-apps
-- /usr/lib/gradle/4.7/bin/gradle clean
-- /usr/lib/gradle/4.7/bin/gradle resolveDeps
-- /usr/lib/gradle/4.7/bin/gradle war
-- /usr/lib/gradle/4.7/bin/gradle deploy
-  #
-- rm -rf TRAVIS_BUILD_DIR/bbb-voice
-- rm -rf TRAVIS_BUILD_DIR/bbb-video
-- rm -rf TRAVIS_BUILD_DIR/bigbluebutton-apps
-  #
+#- echo building bbb-voice
+#- cd $TRAVIS_BUILD_DIR/bbb-voice
+#- /usr/lib/gradle/4.7/bin/gradle clean
+#- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+#- /usr/lib/gradle/4.7/bin/gradle war
+#- /usr/lib/gradle/4.7/bin/gradle deploy
+#  #
+#- echo building bbb-video
+#- cd $TRAVIS_BUILD_DIR/bbb-video
+#- /usr/lib/gradle/4.7/bin/gradle clean
+#- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+#- /usr/lib/gradle/4.7/bin/gradle war
+#- /usr/lib/gradle/4.7/bin/gradle deploy
+#  #
+#- echo building bigbluebutton-apps
+#- cd $TRAVIS_BUILD_DIR/bigbluebutton-apps
+#- /usr/lib/gradle/4.7/bin/gradle clean
+#- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+#- /usr/lib/gradle/4.7/bin/gradle war
+#- /usr/lib/gradle/4.7/bin/gradle deploy
+#  #
+#- rm -rf TRAVIS_BUILD_DIR/bbb-voice
+#- rm -rf TRAVIS_BUILD_DIR/bbb-video
+#- rm -rf TRAVIS_BUILD_DIR/bigbluebutton-apps
+#  #
   # building tomcat core webapp (server+api)
   #
-- echo 'building web app'
-- cd $TRAVIS_BUILD_DIR/bigbluebutton-web
-  #//todo: sheck version upgrade latest grails2 and grails3 - grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
-- /usr/lib/gradle/4.7/bin/gradle properties
-- /usr/lib/gradle/4.7/bin/gradle clean
-- /usr/lib/gradle/4.7/bin/gradle resolveDeps
-- grails clean
-- grails compile
-- grails war
-- /usr/lib/gradle/4.7/bin/gradle deploy
-#//todo: move grails compile into gradle (grails plugin)
-#
-- echo 'building API demo'
-- cd $TRAVIS_BUILD_DIR/bbb-api-demo
-- /usr/lib/gradle/4.7/bin/gradle clean
-- /usr/lib/gradle/4.7/bin/gradle resolveDeps
-- /usr/lib/gradle/4.7/bin/gradle war
-- /usr/lib/gradle/4.7/bin/gradle deploy
-#
-- echo 'building bbb-lti service'
-- cd $TRAVIS_BUILD_DIR/bbb-lti
-  #- grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
-- grails clean
-- grails compile
-- grails war
+#- echo 'building web app'
+#- cd $TRAVIS_BUILD_DIR/bigbluebutton-web
+#  #//todo: sheck version upgrade latest grails2 and grails3 - grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
+#- /usr/lib/gradle/4.7/bin/gradle properties
+#- /usr/lib/gradle/4.7/bin/gradle clean
+#- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+#- grails clean
+#- grails compile
+#- grails war
+#- /usr/lib/gradle/4.7/bin/gradle deploy
+##//todo: move grails compile into gradle (grails plugin)
+##
+#- echo 'building API demo'
+#- cd $TRAVIS_BUILD_DIR/bbb-api-demo
+#- /usr/lib/gradle/4.7/bin/gradle clean
+#- /usr/lib/gradle/4.7/bin/gradle resolveDeps
+#- /usr/lib/gradle/4.7/bin/gradle war
+#- /usr/lib/gradle/4.7/bin/gradle deploy
+##
+#- echo 'building bbb-lti service'
+#- cd $TRAVIS_BUILD_DIR/bbb-lti
+#  #- grails set-grails-version # when not compiling with grails 2.5.2 but the most recent grails2
+#- grails clean
+#- grails compile
+#- grails war
 #
 - echo 'building deskshare app'
 - cd $TRAVIS_BUILD_DIR/deskshare
@@ -150,19 +150,19 @@ script:
 - /usr/lib/gradle/4.7/bin/gradle deploy
 #
 
-- find $BUILD_DIRECTORY -maxdepth 3 -type d -exec ls -l {} \; -print
-  #
-  # building the html5 meteor backend and (web-(client
-  #
-- cd $HOME && curl https://install.meteor.com | sh
-- cd $TRAVIS_BUILD_DIR/bigbluebutton-html5 && meteor npm install && meteor npm install @babel/runtime
-  #   - meteor remove standard-minifier-js
-  # make active in case minifier causes travis to time out again (this thing takes loooong
-- cd $TRAVIS_BUILD_DIR/bigbluebutton-html5
-- meteor remove standard-minifier-js
-- meteor build $HTML5METEOR --directory --server-only --architecture=os.linux.x86_64
-  #- cd $HTML5METEOR/bundle/programs/server && npm install --production
-  #
+#- find $BUILD_DIRECTORY -maxdepth 3 -type d -exec ls -l {} \; -print
+#  #
+#  # building the html5 meteor backend and (web-(client
+#  #
+#- cd $HOME && curl https://install.meteor.com | sh
+#- cd $TRAVIS_BUILD_DIR/bigbluebutton-html5 && meteor npm install && meteor npm install @babel/runtime
+#  #   - meteor remove standard-minifier-js
+#  # make active in case minifier causes travis to time out again (this thing takes loooong
+#- cd $TRAVIS_BUILD_DIR/bigbluebutton-html5
+#- meteor remove standard-minifier-js
+#- meteor build $HTML5METEOR --directory --server-only --architecture=os.linux.x86_64
+#  #- cd $HTML5METEOR/bundle/programs/server && npm install --production
+#  #
 
 before_deploy:
 - cd $BUILD_DIRECTORY
@@ -172,15 +172,15 @@ before_deploy:
 - tar -cvf bbb-html5.tar $HTML5METEOR
 - ls -rtl $BUILD_DIRECTORY
 
-deploy:
-  provider: releases
-  api_key:
-    secure: "cTb2AA8SqAAYmnGwN4RkTVxjHtMj5i+mCh2PsgTmXkdO8r9XNdmL1/fpyCcS1v0PLOhPEJbk8lzYWMiPCAxMJ1HrmEIctORwyKMDyv6tattsRaqUpVc1wD728QZ3ZEKA61h+bQy20rXkgotpzHnsDMRp6eokzLfUrSN530+sa2di69r3ACRSkNbuFbraoUpXQVAPvv1tiiS7ZqtNjva2Zx7UZpx8evYs06eXij6/oSNZvwRdcbsNWYuo/MUI/XQ+dInzf/0KIqKtfVF9RoU3fre4vuqNlW0qFJcxAJ3RoTVY4f/oi3HD+61ecbPEesLkTFY1C3EpQYrzIJg4owz/FQR/60/hKjDaCOzn5LmVBSDDY9KZrz/+DiJPjftUgT/NNdX+g+dD+xGMBJ/lbu8UxU0qIESq1Djk/Z50pRZEwIx0j6Y8GYI0pImcv8vF0n/NdK9qSu+ilzruHiJgNBpjYu/wn4PsfYH2fMDGPODZJhjft56pN+zAE73v5yZtAkSikwZ+2Jh78TZaKHRactdNh/hlF49aZLSBP1T9YsJLyDCjl70nINsGcDaf1g8+6v1BlMob7Lqd22FwrDQ6pMAWGR2LbriZ0hmakhY5GUjTtUr1RoSMUtYE2/XCSBo+dcYpdGWRCW0kygr9dasyF6598yQomO9kZtQ1xvN+kXOcrdU="
-  file:
-    - "$BUILD_DIRECTORY/red5webapps.tar"
-    - "$BUILD_DIRECTORY/tomcatwebapps.tar"
-    - "$BUILD_DIRECTORY/bbb_javalibs.tar"
-    - "$BUILD_DIRECTORY/bbb-html5.tar"
-  skip_cleanup: true
-  on:
-    branch: 'mr_private/MR-v2.2-dev-playground'
+#deploy:
+#  provider: releases
+#  api_key:
+#    secure: "cTb2AA8SqAAYmnGwN4RkTVxjHtMj5i+mCh2PsgTmXkdO8r9XNdmL1/fpyCcS1v0PLOhPEJbk8lzYWMiPCAxMJ1HrmEIctORwyKMDyv6tattsRaqUpVc1wD728QZ3ZEKA61h+bQy20rXkgotpzHnsDMRp6eokzLfUrSN530+sa2di69r3ACRSkNbuFbraoUpXQVAPvv1tiiS7ZqtNjva2Zx7UZpx8evYs06eXij6/oSNZvwRdcbsNWYuo/MUI/XQ+dInzf/0KIqKtfVF9RoU3fre4vuqNlW0qFJcxAJ3RoTVY4f/oi3HD+61ecbPEesLkTFY1C3EpQYrzIJg4owz/FQR/60/hKjDaCOzn5LmVBSDDY9KZrz/+DiJPjftUgT/NNdX+g+dD+xGMBJ/lbu8UxU0qIESq1Djk/Z50pRZEwIx0j6Y8GYI0pImcv8vF0n/NdK9qSu+ilzruHiJgNBpjYu/wn4PsfYH2fMDGPODZJhjft56pN+zAE73v5yZtAkSikwZ+2Jh78TZaKHRactdNh/hlF49aZLSBP1T9YsJLyDCjl70nINsGcDaf1g8+6v1BlMob7Lqd22FwrDQ6pMAWGR2LbriZ0hmakhY5GUjTtUr1RoSMUtYE2/XCSBo+dcYpdGWRCW0kygr9dasyF6598yQomO9kZtQ1xvN+kXOcrdU="
+#  file:
+#    - "$BUILD_DIRECTORY/red5webapps.tar"
+#    - "$BUILD_DIRECTORY/tomcatwebapps.tar"
+#    - "$BUILD_DIRECTORY/bbb_javalibs.tar"
+#    - "$BUILD_DIRECTORY/bbb-html5.tar"
+#  skip_cleanup: true
+#  on:
+#    branch: 'mr_private/MR-v2.2-dev-playground'
