@@ -59,6 +59,7 @@ package org.bigbluebutton.modules.users.services
   import org.bigbluebutton.main.model.users.BreakoutRoom;
   import org.bigbluebutton.main.model.users.IMessageListener;
   import org.bigbluebutton.main.model.users.events.ChangeMyRole;
+  import org.bigbluebutton.main.model.users.events.ConnectionFailedEvent;
   import org.bigbluebutton.main.model.users.events.LookUpUserResultEvent;
   import org.bigbluebutton.main.model.users.events.StreamStartedEvent;
   import org.bigbluebutton.main.model.users.events.StreamStoppedEvent;
@@ -418,7 +419,7 @@ package org.bigbluebutton.modules.users.services
       var extId: String = user.extId as String;
       var name: String = user.name as String;
       var role: String = user.role as String;
-      var guest: Boolean = user.role as Boolean;
+      var guest: Boolean = user.guest as Boolean;
       var authed: Boolean = user.authed as Boolean;
       var waitingForAcceptance: Boolean = user.waitingForAcceptance as Boolean;
       var emoji: String = user.emoji as String;
@@ -571,6 +572,14 @@ package org.bigbluebutton.modules.users.services
       logData.logCode = "received_user_ejected";
 			logData.userId = userId;
       LOGGER.debug(JSON.stringify(logData));
+			
+			// Let the logout happen when receiving the user ejected message instead
+			// of when the connection is closed in NetConnectionDelegate. 
+			// Firefox and IE isn't closing the connection when using RTMPS
+			// which doesn't trigger this event. (ralam july 17, 2018)			
+			var reason:String = ConnectionFailedEvent.USER_EJECTED_FROM_MEETING;
+			var cfe:ConnectionFailedEvent = new ConnectionFailedEvent(reason);
+			dispatcher.dispatchEvent(cfe);
     }
     
     private function handleUserLocked(msg:Object):void {
@@ -802,54 +811,53 @@ package org.bigbluebutton.modules.users.services
     private function sendUserEmojiChangedEvent(userId: String, emoji: String):void{
       var dispatcher:Dispatcher = new Dispatcher();
       dispatcher.dispatchEvent(new UserEmojiChangedEvent(userId, emoji));
-    }
-    
-    
-    private function handleUserBroadcastCamStartedEvtMsg(msg:Object):void {
-      var userId: String = msg.body.userId as String; 
-      var streamId: String = msg.body.stream as String;
-      var logData:Object = UsersUtil.initLogData();
-      logData.tags = ["webcam"];
-      logData.logCode = "user_broadcasting_camera_start";
-			logData.userId = userId;
-      logData.streamId = streamId;
+	}
 
-      if (isValidFlashWebcamStream(streamId)) {
+	private function handleUserBroadcastCamStartedEvtMsg(msg:Object):void {
+		var userId:String = msg.body.userId as String;
+		var streamId:String = msg.body.stream as String;
+		var logData:Object = UsersUtil.initLogData();
+		logData.tags = ["webcam"];
+		logData.logCode = "user_broadcasting_camera_start";
+		logData.userId = userId;
+		logData.streamId = streamId;
 
-        LOGGER.info(JSON.stringify(logData));
+		if (isValidFlashWebcamStream(streamId)) {
 
-        var mediaStream: MediaStream = new MediaStream(streamId, userId)
-          LiveMeeting.inst().webcams.add(mediaStream);
+			LOGGER.info(JSON.stringify(logData));
 
-        var webUser: User2x = UsersUtil.getUser(userId);
-        if (webUser != null) {
-          sendStreamStartedEvent(userId, webUser.name, streamId);
-        }
-      }
-    }
-    
-    private function sendStreamStartedEvent(userId: String, name: String, stream: String):void{
-      var dispatcher:Dispatcher = new Dispatcher();
-      dispatcher.dispatchEvent(new StreamStartedEvent(userId, name, stream));
-    }
-    
-    private function handleUserBroadcastCamStoppedEvtMsg(msg: Object):void {  
-      var userId: String = msg.body.userId as String; 
-      var stream: String = msg.body.stream as String;
-      
-      var logData:Object = UsersUtil.initLogData();
-      logData.tags = ["webcam"];
-			logData.logCode = "user_broadcasting_camera_stop";
-			logData.userId = userId;
-			logData.streamId = stream;
-      LOGGER.info(JSON.stringify(logData));
-      
-      var mediaStream: MediaStream = LiveMeeting.inst().webcams.remove(stream);
-      
-			if (mediaStream != null) {
-      	sendStreamStoppedEvent(mediaStream.userId, stream);
+			var mediaStream:MediaStream = new MediaStream(streamId, userId)
+			LiveMeeting.inst().webcams.add(mediaStream);
+
+			var webUser:User2x = UsersUtil.getUser(userId);
+			if (webUser != null) {
+				sendStreamStartedEvent(userId, webUser.name, streamId);
 			}
-    }
+		}
+	}
+
+	private function sendStreamStartedEvent(userId:String, name:String, stream:String):void {
+		var dispatcher:Dispatcher = new Dispatcher();
+		dispatcher.dispatchEvent(new StreamStartedEvent(userId, name, stream));
+	}
+
+	private function handleUserBroadcastCamStoppedEvtMsg(msg:Object):void {
+		var userId:String = msg.body.userId as String;
+		var stream:String = msg.body.stream as String;
+
+		var logData:Object = UsersUtil.initLogData();
+		logData.tags = ["webcam"];
+		logData.logCode = "user_broadcasting_camera_stop";
+		logData.userId = userId;
+		logData.streamId = stream;
+		LOGGER.info(JSON.stringify(logData));
+
+		var mediaStream:MediaStream = LiveMeeting.inst().webcams.remove(stream);
+
+		if (mediaStream != null) {
+			sendStreamStoppedEvent(mediaStream.userId, stream);
+		}
+	}
     
     private function sendStreamStoppedEvent(userId: String, streamId: String):void{
       var dispatcher:Dispatcher = new Dispatcher();
