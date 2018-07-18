@@ -184,4 +184,6 @@ deploy:
     - "$BUILD_DIRECTORY/bbb-html5.tar"
   skip_cleanup: true
   on:
-    branch: 'mr_private/MR-v2.2-dev-playground'
+    branch:
+    - 'mr_private/MR-v2.2-dev-playground'
+    - 'travis_playground'
