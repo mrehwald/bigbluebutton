@@ -6,7 +6,7 @@ organization := "org.bigbluebutton"
 
 version := "0.0.2"
 
-scalaVersion  := "2.12.7"
+scalaVersion  := "2.12.6"
 
 scalacOptions ++= Seq(
   "-unchecked",
@@ -93,16 +93,22 @@ libraryDependencies += "org.mockito" % "mockito-core" % "2.7.22" % "test"
 
 
 import com.typesafe.sbt.SbtScalariform
-
 import scalariform.formatter.preferences._
 import com.typesafe.sbt.SbtScalariform.ScalariformKeys
 
-SbtScalariform.defaultScalariformSettings
 
-ScalariformKeys.preferences := ScalariformKeys.preferences.value
+scalariformPreferences := scalariformPreferences.value
   .setPreference(AlignSingleLineCaseStatements, true)
-  .setPreference(DoubleIndentClassDeclaration, true)
-  .setPreference(AlignParameters, true)
+  .setPreference(DoubleIndentConstructorArguments, true)
+  .setPreference(DanglingCloseParenthesis, Preserve)
+
+
+//SbtScalariform.defaultScalariformSettings
+//
+//ScalariformKeys.preferences := ScalariformKeys.preferences.value
+//  .setPreference(AlignSingleLineCaseStatements, true)
+//  .setPreference(DoubleIndentClassDeclaration, true)
+//  .setPreference(AlignParameters, true)
 
 
 
