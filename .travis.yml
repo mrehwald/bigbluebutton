@@ -1,7 +1,8 @@
 branches:
   only:
-  - 'v2.2-dev'
-  - 'mr_private/MR-v2.2-dev-playground'
+#  - 'v2.2-dev'
+#  - 'mr_private/MR-v2.2-dev-playground'
+- 'deskshare_fixes'
 
 language: scala
 scala:
