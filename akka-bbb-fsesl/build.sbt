@@ -84,6 +84,11 @@ libraryDependencies += "org.mockito" % "mockito-core" % "2.7.22" % "test"
 
 Seq(Revolver.settings: _*)
 
+import com.typesafe.sbt.SbtScalariform
+import scalariform.formatter.preferences._
+import com.typesafe.sbt.SbtScalariform.ScalariformKeys
+
+
 scalariformPreferences := scalariformPreferences.value
   .setPreference(AlignSingleLineCaseStatements, true)
   .setPreference(DoubleIndentConstructorArguments, true)
