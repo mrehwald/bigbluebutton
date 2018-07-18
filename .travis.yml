@@ -73,8 +73,7 @@ script:
 - cd $TRAVIS_BUILD_DIR/bbb-common-message && sbt clean update  publish publishLocal
 - cd $TRAVIS_BUILD_DIR/bbb-common-web && sbt clean update  publish publishLocal
 - cd $TRAVIS_BUILD_DIR/bbb-apps-common && sbt clean update  publish publishLocal
-- cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean update  publishLocal
- packages
+- cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean update  publish publishLocal
 - cd $TRAVIS_BUILD_DIR/akka-bbb-apps && sbt clean update package  publishLocal
 - cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean update package  publishLocal
 - cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean update package  publishLocal
