@@ -69,14 +69,14 @@ before_install:
 
 script:
   # libraries
-- cd $TRAVIS_BUILD_DIR/bbb-common-message && sbt clean update  publishLocal
-- cd $TRAVIS_BUILD_DIR/bbb-common-web && sbt clean update  publishLocal
-- cd $TRAVIS_BUILD_DIR/bbb-apps-common && sbt clean update  publishLocal
-- cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean update  publishLocal
+- cd $TRAVIS_BUILD_DIR/bbb-common-message && sbt clean update  publish publishLocal
+- cd $TRAVIS_BUILD_DIR/bbb-common-web && sbt clean update  publish publishLocal
+- cd $TRAVIS_BUILD_DIR/bbb-apps-common && sbt clean update  publish publishLocal
+- cd $TRAVIS_BUILD_DIR/bbb-fsesl-client && sbt clean update  publish publishLocal
 # packages
-- cd $TRAVIS_BUILD_DIR/akka-bbb-apps && sbt clean update package  publishLocal
-- cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean update package  publishLocal
-- cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean update package  publishLocal
+- cd $TRAVIS_BUILD_DIR/akka-bbb-apps && sbt clean update package  publish publishLocal
+- cd $TRAVIS_BUILD_DIR/akka-bbb-fsesl && sbt clean update package publish publishLocal
+- cd $TRAVIS_BUILD_DIR/akka-bbb-transcode && sbt clean update package publish publishLocal
 #//todo: package content od target directory
   #
   # cleaning up sources of already built libraries as we ran into 'No Space Left on Device' issues at some point about here
