@@ -4,7 +4,7 @@ organization := "org.bigbluebutton"
 
 version := "0.0.19-SNAPSHOT"
 
-scalaVersion  := "2.12.7"
+scalaVersion  := "2.12.6"
 
 scalacOptions ++= Seq(
   "-unchecked",
@@ -32,9 +32,9 @@ libraryDependencies ++= {
 	)}
 
 // https://mvnrepository.com/artifact/org.scala-lang/scala-library
-libraryDependencies += "org.scala-lang" % "scala-library" % "2.12.2"
+libraryDependencies += "org.scala-lang" % "scala-library" % "2.12.6"
 // https://mvnrepository.com/artifact/org.scala-lang/scala-compiler
-libraryDependencies += "org.scala-lang" % "scala-compiler" % "2.12.2"
+libraryDependencies += "org.scala-lang" % "scala-compiler" % "2.12.6"
 
 libraryDependencies += "junit" % "junit" % "4.12" % "test"
 libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % "test"
