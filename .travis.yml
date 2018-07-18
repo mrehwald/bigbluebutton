@@ -13,6 +13,7 @@ jdk:
 - oraclejdk8
 #- openjdk8
 - oraclejdk10
+- openjdk10
 - openjdk11
 
 node_js: 9
