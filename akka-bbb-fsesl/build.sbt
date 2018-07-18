@@ -82,7 +82,7 @@ libraryDependencies += "org.scalatest" % "scalatest_2.12" % "3.0.3" % "test"
 
 libraryDependencies += "org.mockito" % "mockito-core" % "2.7.22" % "test"
 
-seq(Revolver.settings: _*)
+Seq(Revolver.settings: _*)
 
 scalariformSettings
 

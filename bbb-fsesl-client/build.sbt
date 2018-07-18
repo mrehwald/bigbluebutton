@@ -24,7 +24,7 @@ libraryDependencies ++= {
 	  "ch.qos.logback"           %  "logback-classic"   % "1.0.3"
 	)}
 
-seq(Revolver.settings: _*)
+Seq(Revolver.settings: _*)
 
 //-----------
 // Packaging

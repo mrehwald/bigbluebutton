@@ -64,7 +64,7 @@ libraryDependencies ++= {
 		"redis.clients" % "jedis" % "2.9.0"
 	)}
 
-seq(Revolver.settings: _*)
+Seq(Revolver.settings: _*)
 
 scalariformSettings
 

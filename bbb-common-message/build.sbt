@@ -51,7 +51,7 @@ libraryDependencies += "org.scalatest" % "scalatest_2.12" % "3.0.3" % "test"
 // https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-scala_2.12
 libraryDependencies += "com.fasterxml.jackson.module" % "jackson-module-scala_2.12" % "2.8.8"
 
-seq(Revolver.settings: _*)
+Seq(Revolver.settings: _*)
 
 //-----------
 // Packaging
