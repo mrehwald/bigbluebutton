@@ -168,9 +168,9 @@ script:
 
 before_deploy:
 - cd $BUILD_DIRECTORY
-- tar -cvf red5webapps.tar ${RED5APPSDIR}/
-- tar -cvf tomcatwebapps.tar ${TOMCATAPPSDIR}/
-- tar -cvf bbb-html5.tar ${HTML5METEOR}/
+- tar -cJf red5webapps.tar.xz ${RED5APPSDIR}/
+- tar -cJf tomcatwebapps.tar.xz ${TOMCATAPPSDIR}/
+- tar -cJf bbb-html5.tar.xz ${HTML5METEOR}/
 - ls -rtl $BUILD_DIRECTORY
 
 deploy:
