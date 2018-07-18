@@ -84,7 +84,10 @@ libraryDependencies += "org.mockito" % "mockito-core" % "2.7.22" % "test"
 
 Seq(Revolver.settings: _*)
 
-scalariformSettings
+scalariformPreferences := scalariformPreferences.value
+  .setPreference(AlignSingleLineCaseStatements, true)
+  .setPreference(DoubleIndentConstructorArguments, true)
+  .setPreference(DanglingCloseParenthesis, Preserve)
 
 //-----------
 // Packaging

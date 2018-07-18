@@ -67,13 +67,13 @@ libraryDependencies += "com.typesafe.akka" % "akka-slf4j_2.12" % akkaVersion
 libraryDependencies += "com.github.etaty" % "rediscala_2.12" % "1.8.0"
 
 libraryDependencies += "com.softwaremill.quicklens" %% "quicklens" % "1.4.8"
-libraryDependencies += "com.google.code.gson" % "gson" % "2.8.0"
+libraryDependencies += "com.google.code.gson" % "gson" % "2.8.5"
 libraryDependencies += "joda-time" % "joda-time" % "2.9.9"
 libraryDependencies += "io.spray" % "spray-json_2.12" % "1.3.3"
 libraryDependencies += "org.parboiled" % "parboiled-scala_2.12" % "1.1.8"
 
 // https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-scala_2.12
-libraryDependencies += "com.fasterxml.jackson.module" % "jackson-module-scala_2.12" % "2.8.8"
+libraryDependencies += "com.fasterxml.jackson.module" % "jackson-module-scala_2.12" % "2.9.6"
 
 
 // For generating test reports
