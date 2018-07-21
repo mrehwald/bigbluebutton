@@ -176,8 +176,8 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-#    secure: "cTb2AA8SqAAYmnGwN4RkTVxjHtMj5i+mCh2PsgTmXkdO8r9XNdmL1/fpyCcS1v0PLOhPEJbk8lzYWMiPCAxMJ1HrmEIctORwyKMDyv6tattsRaqUpVc1wD728QZ3ZEKA61h+bQy20rXkgotpzHnsDMRp6eokzLfUrSN530+sa2di69r3ACRSkNbuFbraoUpXQVAPvv1tiiS7ZqtNjva2Zx7UZpx8evYs06eXij6/oSNZvwRdcbsNWYuo/MUI/XQ+dInzf/0KIqKtfVF9RoU3fre4vuqNlW0qFJcxAJ3RoTVY4f/oi3HD+61ecbPEesLkTFY1C3EpQYrzIJg4owz/FQR/60/hKjDaCOzn5LmVBSDDY9KZrz/+DiJPjftUgT/NNdX+g+dD+xGMBJ/lbu8UxU0qIESq1Djk/Z50pRZEwIx0j6Y8GYI0pImcv8vF0n/NdK9qSu+ilzruHiJgNBpjYu/wn4PsfYH2fMDGPODZJhjft56pN+zAE73v5yZtAkSikwZ+2Jh78TZaKHRactdNh/hlF49aZLSBP1T9YsJLyDCjl70nINsGcDaf1g8+6v1BlMob7Lqd22FwrDQ6pMAWGR2LbriZ0hmakhY5GUjTtUr1RoSMUtYE2/XCSBo+dcYpdGWRCW0kygr9dasyF6598yQomO9kZtQ1xvN+kXOcrdU="
-    secure: "$ENCRYPTED_GITHUBAPITOKEN"
+    secure: "cTb2AA8SqAAYmnGwN4RkTVxjHtMj5i+mCh2PsgTmXkdO8r9XNdmL1/fpyCcS1v0PLOhPEJbk8lzYWMiPCAxMJ1HrmEIctORwyKMDyv6tattsRaqUpVc1wD728QZ3ZEKA61h+bQy20rXkgotpzHnsDMRp6eokzLfUrSN530+sa2di69r3ACRSkNbuFbraoUpXQVAPvv1tiiS7ZqtNjva2Zx7UZpx8evYs06eXij6/oSNZvwRdcbsNWYuo/MUI/XQ+dInzf/0KIqKtfVF9RoU3fre4vuqNlW0qFJcxAJ3RoTVY4f/oi3HD+61ecbPEesLkTFY1C3EpQYrzIJg4owz/FQR/60/hKjDaCOzn5LmVBSDDY9KZrz/+DiJPjftUgT/NNdX+g+dD+xGMBJ/lbu8UxU0qIESq1Djk/Z50pRZEwIx0j6Y8GYI0pImcv8vF0n/NdK9qSu+ilzruHiJgNBpjYu/wn4PsfYH2fMDGPODZJhjft56pN+zAE73v5yZtAkSikwZ+2Jh78TZaKHRactdNh/hlF49aZLSBP1T9YsJLyDCjl70nINsGcDaf1g8+6v1BlMob7Lqd22FwrDQ6pMAWGR2LbriZ0hmakhY5GUjTtUr1RoSMUtYE2/XCSBo+dcYpdGWRCW0kygr9dasyF6598yQomO9kZtQ1xvN+kXOcrdU="
+#    secure: "$ENCRYPTED_GITHUBAPITOKEN"
 file:
     - "$BUILD_DIRECTORY/bbb-red5webapps.tar.xz"
     - "$BUILD_DIRECTORY/bbb-tomcatwebapps.tar.xz"
